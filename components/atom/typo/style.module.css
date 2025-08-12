@@ -1,0 +1,7 @@
+.noFlexGrow {
+  flex-grow: 0;
+}
+
+.noFlexShrink {
+  flex-shrink: 0;
+}

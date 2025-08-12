@@ -1,0 +1,13 @@
+.topDivider::before, .bottomDivider::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: var(--label-link);
+  border-radius: var(--radius-04);
+  animation: fadeIn var(--transition-duration-fast) ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}

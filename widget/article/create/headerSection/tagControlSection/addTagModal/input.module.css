@@ -1,0 +1,51 @@
+.inputWrapper {
+  width: 100%;
+  border: 1px solid var(--line-border);
+}
+
+.inputWrapper:hover{border-color: var(--status-translucent-interaction);}
+
+.inputWrapperFocus, .inputWrapperFocus:hover
+{border-color: var(--status-interaction);}
+
+.input {
+  color: var(--label-normal);
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.input::placeholder {
+  color: var(--label-alternative);
+}
+
+.nonInputLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.nonInputLayer > * {pointer-events: initial;}
+
+.mediumSize {
+  padding: var(--dimension-08);
+  border-radius: var(--radius-12);
+}
+.mediumSize, .normalSize::placeholder {
+  padding: var(--dimension-08);
+  font-size: var(--typo-medium-font-size);
+  line-height: var(--typo-medium-line-height);
+}
+
+.smallSize {
+  padding: var(--dimension-06);
+  border-radius: var(--radius-10);
+}
+.smallSize, .smallSize::placeholder {
+  font-size: var(--typo-small-font-size);
+  line-height: var(--typo-small-line-height);
+}
+
+.trailButton::before {
+  border-radius: var(--radius-04);
+}

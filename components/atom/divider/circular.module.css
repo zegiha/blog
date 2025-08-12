@@ -1,0 +1,14 @@
+.large, .medium, .small {
+  flex-shrink: 0;
+  flex-grow: 0;
+  border-radius: var(--radius-99);
+}
+
+.medium, .large {
+  width: 4px;
+  height: 4px;
+}
+.small {
+  width: 2px;
+  height: 2px;
+}

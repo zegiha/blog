@@ -1,0 +1,7 @@
+.container {
+  padding: 120px var(--dimension-24);
+}
+
+.wrapper {
+  max-width: 720px;
+}

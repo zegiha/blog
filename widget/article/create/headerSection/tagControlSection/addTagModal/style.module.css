@@ -1,0 +1,21 @@
+.listContainer {
+  flex: 1;
+  min-height: 0;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.list>div {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.existingTag {
+  padding: var(--dimension-04) var(--dimension-12);
+  cursor: pointer;
+}
+.existingTag::before {border-radius: var(--radius-06);}

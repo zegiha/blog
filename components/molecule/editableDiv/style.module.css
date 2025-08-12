@@ -1,0 +1,65 @@
+.container {
+  position: relative;
+  border-radius: var(--radius-04);
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  width: calc(64px + 1px + var(--dimension-04));
+  height: var(--dimension-48);
+  transform: translate(-100%, -50%);
+}
+
+.placeholder, .content {
+  overflow-wrap: anywhere;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  outline: none;
+  border: none;
+  color: var(--label-normal)
+}
+
+.placeholder {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  color: var(--label-alternative);
+}
+
+.controllSection {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.controlButton {
+  position: relative;
+  padding: var(--dimension-02);
+}
+
+.controlButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-04);
+  transition: background-color var(--transition-duration-fast) ease-in-out;
+}
+
+.controlButton:hover::before {
+  background-color: var(--interaction-hover);
+}
+
+.controlButton:active::before {
+  transition: background-color var(--transition-duration-xxfast) ease-in-out;
+  background-color: var(--interaction-active);
+}
+
+.controlButtonAdd {cursor: pointer;}
+.controlButtonDragIndicator {cursor: grab;}

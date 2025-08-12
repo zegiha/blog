@@ -1,0 +1,10 @@
+.large, .medium, .small {
+  width: 100%;
+}
+
+.large {
+  height: 16px;
+}
+.medium, .small {
+  height: 1px;
+}

@@ -1,0 +1,19 @@
+.interaction {
+  position: relative;
+}
+
+.interaction::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transition: background-color var(--transition-duration-fast) ease-in-out;
+}
+
+.interaction:hover::before {
+  background-color: var(--interaction-hover);
+}
+
+.interaction:active::before {
+  transition: background-color var(--transition-duration-xxfast) ease-in-out;
+  background-color: var(--interaction-active);
+}

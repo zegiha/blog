@@ -1,0 +1,7 @@
+.normal {
+  background-color: var(--line-normal);
+}
+
+.alternative {
+  background-color: var(--line-alternative);
+}

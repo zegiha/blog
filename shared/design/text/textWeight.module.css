@@ -1,0 +1,7 @@
+.weightNormal {
+  font-weight: var(--typo-font-weight-normal);
+}
+
+.weightAccent {
+  font-weight: var(--typo-font-weight-accent);
+}

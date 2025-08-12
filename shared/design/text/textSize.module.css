@@ -1,0 +1,39 @@
+.xxxlarge {
+  font-size: var(--typo-xxxlarge-font-size);
+  line-height: var(--typo-xxxlarge-line-height);
+}
+
+.xxlarge {
+  font-size: var(--typo-xxlarge-font-size);
+  line-height: var(--typo-xxlarge-line-height);
+}
+
+.xlarge {
+  font-size: var(--typo-xlarge-font-size);
+  line-height: var(--typo-xlarge-line-height);
+}
+
+.large {
+  font-size: var(--typo-large-font-size);
+  line-height: var(--typo-large-line-height);
+}
+
+.medium {
+  font-size: var(--typo-medium-font-size);
+  line-height: var(--typo-medium-line-height);
+}
+
+.small {
+  font-size: var(--typo-small-font-size);
+  line-height: var(--typo-small-line-height);
+}
+
+.xsmall {
+  font-size: var(--typo-xsmall-font-size);
+  line-height: var(--typo-xsmall-line-height);
+}
+
+.xxsmall {
+  font-size: var(--typo-xxsmall-font-size);
+  line-height: var(--typo-xxsmall-line-height);
+}

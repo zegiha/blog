@@ -1,0 +1,48 @@
+/* 텍스트 색상 스타일 */
+.strong {
+  color: var(--label-strong);
+}
+
+.normal {
+  color: var(--label-normal);
+}
+
+.alternative {
+  color: var(--label-alternative);
+}
+
+.link {
+  color: var(--label-link);
+}
+
+.positive {
+  color: var(--status-positive);
+}
+
+.cautionary {
+  color: var(--status-cautionary);
+}
+
+.negative {
+  color: var(--status-negative);
+}
+
+.brand {
+  color: var(--brand-normal);
+}
+
+.white {
+  color: var(--static-white);
+}
+
+.black {
+  color: var(--static-black);
+}
+
+.reverseWhite {
+  color: var(--reverse-white);
+}
+
+.reverseBlack {
+  color: var(--reverse-black);
+}

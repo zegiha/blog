@@ -1,0 +1,4 @@
+.container {
+  padding: var(--dimension-24);
+  /*background-color: var(--background-normal);*/
+}

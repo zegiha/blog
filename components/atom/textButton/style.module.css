@@ -1,0 +1,8 @@
+.container {
+  user-select: none;
+}
+
+.container::before {
+  margin: -4px;
+  border-radius: var(--radius-06);
+}

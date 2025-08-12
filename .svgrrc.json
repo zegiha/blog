@@ -1,0 +1,5 @@
+{
+  "typescript": true,
+  "icon": true,
+  "svgo": true
+}

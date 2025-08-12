@@ -1,0 +1,52 @@
+.container {
+  position: absolute;
+  background-color: var(--background-elevated);
+  padding: var(--dimension-08);
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-16);
+  box-shadow: 0 6px 8px 4px var(--shadow-normal);
+  z-index: 2;
+}
+
+.floatingWrapper {
+  z-index: 9;
+  position: relative;
+}
+
+.childrenWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.fadeIn {
+  animation: fadeIn var(--transition-duration-fast) ease-in-out;
+}
+.fadeOut {
+  animation: fadeOut var(--transition-duration-fast) ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.9;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    scale: 0.9;
+    transform: translateY(-8px);
+  }
+}
