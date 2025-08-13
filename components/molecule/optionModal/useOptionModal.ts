@@ -34,6 +34,32 @@ export default function useOptionModal({
       if(style.y !== undefined) ref.current.style.top = toCssValue(style.y)
     }
 
+    // const setInPosition = () => {
+    //   if(!ref.current || !style?.position) return
+    //   const dy = [-1, 1], dx = [-1, 1]
+    //   switch(style.position) {
+    //     case "top-right": {
+    //       ref.current.style.top = `${100 * dy[0]}%`
+    //       ref.current.style.left = `${100 * dx[0]}%`
+    //       break
+    //     }
+    //     case "top-left": {
+    //       ref.current.style.top = `${100 * dy[0]}%`
+    //       ref.current.style.left = `${100 * dx[1]}%`
+    //       break
+    //     }
+    //     case "bottom-right": {
+    //       ref.current.style.top = `${100 * dy[1]}%`
+    //       ref.current.style.left = `${100 * dx[0]}%`
+    //       break
+    //     }
+    //     case "bottom-left": {
+    //       ref.current.style.top = `${100 * dy[1]}%`
+    //       ref.current.style.left = `${100 * dx[1]}%`
+    //     }
+    //   }
+    // }
+
     const getFocusedChild = () => {
       if(!ref.current) return null
 

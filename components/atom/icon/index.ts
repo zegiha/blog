@@ -3,4 +3,6 @@ export { default as DragIndicator } from "./DragIndicator";
 export { default as FormatListBulleted } from "./FormatListBulleted";
 export { default as H1 } from "./H1";
 export { default as H2 } from "./H2";
+export { default as List } from "./List";
+export { default as Text } from "./Text";
 export { default as X2 } from "./X2";

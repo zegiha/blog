@@ -16,7 +16,7 @@ export default function ArticleList() {
   } = useArticleListFetching()
 
   return (
-    <Col gap={36}>
+    <Col width={'fill-flex'} gap={36}>
       {data.map((v, i) => (
         <ArticleListItem key={i} {...v}/>
       ))}

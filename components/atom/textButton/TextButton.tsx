@@ -1,5 +1,5 @@
 import Row from '@/components/atom/flex/Row'
-import {Add} from '@/shared/icon'
+import {Add} from '@/components/atom/icon'
 import cn from 'classnames'
 import {Ref} from 'react'
 import Typo from '@/components/atom/typo/Typo'
@@ -22,7 +22,7 @@ export function TextButton({
       interactionStyle.interaction,
       style.container,
     )} alignItems={'center'} gap={2} onClick={onClick}>
-      {leadingIcon && <Add width={18} height={18} />}
+      {leadingIcon && <Add fill={'var(--label-alternative)'} color={'var(--label-alternative)'} width={18} height={18} />}
       <Typo.small color={'alternative'}>{label}</Typo.small>
     </Row>
   )

@@ -12,6 +12,8 @@ interface IUseOptionModal {
     minHeight?: string | number
     x?: string | number
     y?: string | number
+    // position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
+    // gap?: string | number
   }
 }
 

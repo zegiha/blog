@@ -16,7 +16,7 @@ export default function HeaderSection() {
   const [description, setDescription] = useState<string>('')
 
   return (
-    <Col width={'fill-width'} gap={8}>
+    <Col width={'fill-width'} gap={8} style={{zIndex: 2}}>
       <EditableDiv
         width={'fill-width'}
         placeholder={'제목을 입력해주세요'}

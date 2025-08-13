@@ -11,9 +11,11 @@ export interface IFlex {
   gap?: CSSProperties['gap']
   wrap?: boolean
   width?: TWidth
+  tabIndex?: number
   onTransitionEnd?: () => void
   onClick?: (e: React.MouseEvent) => void
   onMouseDown?: (e: React.MouseEvent) => void
+  onKeyDown?: (e: React.KeyboardEvent) => void
   style?: CSSProperties
   children?: ReactNode
 }
@@ -27,9 +29,11 @@ export default function Flex({
   gap,
   wrap,
   width,
+  tabIndex,
   onTransitionEnd,
   onClick,
   onMouseDown,
+  onKeyDown,
   style,
   children,
 }: IFlex) {
@@ -47,8 +51,10 @@ export default function Flex({
         ...getWidth(width),
         ...style,
       }}
+      tabIndex={tabIndex}
       onTransitionEnd={onTransitionEnd}
       onMouseDown={onMouseDown}
+      onKeyDown={onKeyDown}
       onClick={onClick}
     >
       {children}

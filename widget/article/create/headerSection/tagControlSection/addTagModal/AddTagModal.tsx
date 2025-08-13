@@ -7,7 +7,7 @@ import {TextButton} from '@/components/atom/textButton/TextButton'
 import Typo from '@/components/atom/typo/Typo'
 import getWidth from '@/shared/design/width/getWidth'
 import TWidth from '@/shared/design/width/TWidth'
-import {Add} from '@/shared/icon'
+import {Add} from '@/components/atom/icon'
 import cn from 'classnames'
 import {useState} from 'react'
 import OptionModal from '@/components/molecule/optionModal/OptionModal'
@@ -159,7 +159,8 @@ function Input({
           <Add
             width={20}
             height={20}
-            color={'alternative'}
+            fill={'var(--label-alternative)'}
+            color={'var(--label-alternative)'}
           />
         </span>
       </Row>

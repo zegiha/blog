@@ -33,6 +33,8 @@ export default function useClone() {
     clone.style.top = e.clientY + 10 + 'px'
     clone.style.width = rect.width + 'px'
     clone.style.height = rect.height + 'px'
+    clone.style.position = 'fixed'
+
 
     document.body.appendChild(clone)
     cloneRef.current = clone
