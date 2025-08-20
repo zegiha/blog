@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+}
+
+.input, .placeholder {width: 100%;}
+
+.input {
+  position: relative;
+  z-index: 2;
+
+  border-radius: var(--radius-00);
+  border: none;
+  outline: none;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  color: var(--label-alternative);
+}
+
+.h1 {
+  font-size: var(--typo-xxlarge-font-size);
+  font-weight: var(--typo-font-weight-accent);
+  line-height: var(--typo-xxlarge-line-height);
+  color: var(--label-strong);
+}
+
+.h2 {
+  font-size: var(--typo-xlarge-font-size);
+  font-weight: var(--typo-font-weight-accent);
+  line-height: var(--typo-xlarge-line-height);
+  color: var(--label-strong);
+}
+
+.content, .list {
+  font-size: var(--typo-medium-font-size);
+  line-height: var(--typo-medium-line-height);
+  color: var(--label-normal);
+}
+
+.footnote {
+  font-size: var(--typo-small-font-size);
+  font-weight: var(--typo-font-weight-normal);
+  line-height: var(--typo-small-line-height);
+  color: var(--label-alternative);
+}

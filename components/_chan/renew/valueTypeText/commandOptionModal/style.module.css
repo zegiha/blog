@@ -1,0 +1,26 @@
+.list {
+  min-height: 0;
+}
+
+.empty {
+  padding: var(--dimension-16) var(--dimension-08);
+}
+
+.empty>p {
+  text-align: center;
+}
+
+.item {
+  cursor: pointer;
+  padding: var(--dimension-02) var(--dimension-08);
+  outline: none;
+}
+
+.item:focus {
+  border-radius: var(--radius-04);
+  background-color: var(--interaction-hover);
+}
+
+.item::before {
+  border-radius: var(--radius-04);
+}

@@ -1,0 +1,19 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  /*background-color: red;*/
+}
+
+.button {
+  border: none;
+  outline: none;
+  padding: var(--dimension-02);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button::before {
+  border-radius: var(--radius-04);
+}

@@ -8,6 +8,7 @@ import {TArticleContentType} from "@/widget/article/create/bodySection/BodySecti
 interface ControlSectionProps {
   showControlSection: boolean
   onDragButtonDown: (e: React.MouseEvent) => void
+  onDragButtonRightDown: () => void
   onAddButtonClick: () => void
   contentType?: TArticleContentType
 }
@@ -15,6 +16,7 @@ interface ControlSectionProps {
 export default function ControlSection({
   showControlSection,
   onDragButtonDown,
+  onDragButtonRightDown,
   onAddButtonClick,
   contentType,
 }: ControlSectionProps) {
@@ -29,7 +31,11 @@ export default function ControlSection({
         </div>
         <div
           className={cn(style.controlButton, style.controlButtonDragIndicator)}
-          onMouseDown={onDragButtonDown}
+          onMouseDown={(e) => {
+            if(e.button !== 2) onDragButtonDown(e)
+            else onDragButtonRightDown()
+          }}
+          onContextMenu={(e) => e.preventDefault()}
         >
           <DragIndicator fill={'var(--label-alternative)'} color={'var(--label-alternative)'} width={20} height={20}/>
         </div>

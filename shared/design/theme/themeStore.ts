@@ -21,8 +21,16 @@ async function changeTheme(theme: TTheme) {
       body: JSON.stringify({ theme: theme }),
     })
 
-    html.classList.remove('dark', 'light')
-    html.classList.add(theme)
+    document.body.style.transition = 'all var(--transition-duration-normal) ease-in-out';
+
+    setTimeout(() => {
+      html.classList.remove('dark', 'light')
+      html.classList.add(theme)
+    }, 0)
+
+    setTimeout(() => {
+      document.body.style.transition = 'none';
+    }, 370)
   } catch(e) {
     console.error('changeTheme', e)
   }

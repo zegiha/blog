@@ -1,6 +1,7 @@
 'use client'
 
 import Col from '@/components/atom/flex/Col'
+import EditableImage from '@/components/molecule/editableDiv/EditableImage'
 import getWidth from '@/shared/design/width/getWidth'
 import {useDragAndDrop} from '@/shared/hook/dragAndDrop/useDragAndDrop/useDragAndDrop'
 import cn from 'classnames'
@@ -10,12 +11,11 @@ import textWeightStyle from '@/shared/design/text/textWeight.module.css'
 import textColorStyle from '@/shared/design/text/textColor.module.css'
 import style from './style.module.css'
 import OptionModal from "@/components/molecule/optionModal/OptionModal";
-import {useContentEditing} from './hooks/useContentEditing'
 import {useOptionModal} from './hooks/useOptionModal'
 import {useControlSection} from './hooks/useControlSection'
-import {useAutoFocus} from './hooks/useAutoFocus'
 import ControlSection from './ControlSection'
 import BlockTypeSelector from './BlockTypeSelector'
+import EditableText from './EditableText'
 import {EditableDivProps} from './types'
 import Row from "@/components/atom/flex/Row";
 import {List} from "@/components/atom/icon";
@@ -41,38 +41,13 @@ export default function EditableDiv(props: EditableDivProps) {
     }
   } = props
 
-  const [isContentFocus, setIsContentFocus] = useState<boolean>(false)
   const isControllable = controllable && !(textSize || accent || color)
   const placeholder = placeholderProps === '\default' ? '내용 입력하기, /로 명령어 입력하기' : placeholderProps
 
   const {optionModalOpen, setOptionModalOpen, optionData, getOptionTypeFromCommand} = useOptionModal(props)
-  const {contentRef, onInput, onKeyDown} = useContentEditing({...props, optionModalOpen, onOptionModalEntered: () => {
-    const optionType = getOptionTypeFromCommand(content.trim())
-    if (optionType) {
-      onContentTypeChange(optionType)
-      setContent('')
-      setOptionModalOpen(false)
-    }
-  }})
   const {containerRef, showControlSection} = useControlSection({optionModalOpen})
-  const {focusRef, handleBlur} = useAutoFocus(props)
 
   const {ref, onTargetMouseDown} = useDragAndDrop(props.dragProps)
-
-  useEffect(() => {
-    if (!contentRef.current) return
-    const current = contentRef.current.innerHTML ?? ''
-
-    if (current !== content) {
-      contentRef.current.innerHTML = content
-    }
-  }, [content])
-
-  useEffect(() => {
-    if (focusRef.current && contentRef.current) {
-      focusRef.current = contentRef.current
-    }
-  }, [])
 
   return (
     <>
@@ -93,48 +68,44 @@ export default function EditableDiv(props: EditableDivProps) {
                 width={24}
                 height={24}
             />}
-            <div className={style.contentAndPlaceholderWrapper}>
-              <div
-                className={cn(
-                  textSize && textSizeStyle[textSize],
-                  accent && textWeightStyle.weightAccent,
-                  color && textColorStyle[color],
-                  style.contentDefault,
-                )}
-                ref={(el) => {
-                  contentRef.current = el
-                  focusRef.current = el
-                }}
+            {contentType !== 'image' ? (
+              <EditableText
+                content={content}
+                setContent={setContent}
+                textSize={textSize}
+                accent={accent}
+                color={color}
+                placeholder={placeholder}
+                showPlaceholderAlways={showPlaceholderAlways}
                 autoFocus={autoFocus}
-                onKeyDown={onKeyDown}
-                contentEditable
-                onInput={onInput}
-                onFocus={() => {
-                  setIsContentFocus(true)
-                }}
-                onBlur={() => {
-                  handleBlur()
-                  setIsContentFocus(false)
+                contentType={contentType}
+                onContentTypeChange={onContentTypeChange}
+                allowLineBreak={props.allowLineBreak}
+                onAddButtonClick={onAddButtonClick}
+                onDeleteBlock={props.onDeleteBlock}
+                clearAutoFocus={props.clearAutoFocus}
+                optionModalOpen={optionModalOpen}
+                controllable={isControllable}
+                onOptionModalEntered={() => {
+                  const optionType = getOptionTypeFromCommand(content.trim())
+                  if (optionType) {
+                    onContentTypeChange(optionType)
+                    setContent('')
+                    setOptionModalOpen(false)
+                  }
                 }}
               />
-              {content.trim() === '' && (
-                showPlaceholderAlways || isContentFocus
-              ) && (
-                <div
-                  className={cn(
-                    style.placeholder,
-                    textSize && textSizeStyle[textSize],
-                    accent && textWeightStyle.weightAccent,
-                  )}
-                >
-                  {placeholder}
-                </div>
-              )}
-            </div>
+            ):(
+              <EditableImage
+                content={''}
+                setContent={() => {}}
+              />
+            )}
             {isControllable && (
               <ControlSection
                 showControlSection={showControlSection}
                 onDragButtonDown={onTargetMouseDown}
+                onDragButtonRightDown={() => {setOptionModalOpen(true)}}
                 onAddButtonClick={onAddButtonClick}
                 contentType={contentType}
               />

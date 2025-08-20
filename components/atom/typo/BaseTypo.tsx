@@ -14,8 +14,10 @@ export interface IBaseTypo {
   color?: TTextColor
   accent?: boolean
   width?: TWidth
+  textAlign?: 'start' | 'center' | 'end' | 'match-parent'
   noFlexGrow?: boolean
   noFlexShrink?: boolean
+  className?: string
   children?: string
 }
 
@@ -24,8 +26,10 @@ export default function BaseTypo({
   color='normal',
   accent,
   width,
+  textAlign,
   noFlexGrow=true,
   noFlexShrink=true,
+  className,
   children,
 }: IBaseTypo) {
   return createElement(
@@ -37,9 +41,11 @@ export default function BaseTypo({
         accent ? textWeightStyle.weightAccent : textWeightStyle.weightNormal,
         noFlexGrow && style.noFlexGrow,
         noFlexShrink && style.noFlexShrink,
+        className,
       ),
       style: {
-        ...getWidth(width)
+        ...getWidth(width),
+        textAlign,
       }
     },
     children

@@ -42,7 +42,7 @@ export function useContentEditing(props: EditableDivProps & { optionModalOpen: b
 
     const deleteBlock = () => {
       if (content === '' && e.key === 'Backspace') {
-        if(contentType === 'list') {
+        if(contentType !== 'content') {
           onContentTypeChange?.('content')
         } else {
           onDeleteBlock()

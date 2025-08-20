@@ -27,5 +27,9 @@ export const textTypeEl: {
   footnote: {
     icon: <X2 fill={'var(--label-normal)'} color={'var(--label-normal)'} width={24} height={24}/>,
     label: '주석',
+  },
+  image: {
+    icon: <></>,
+    label: '이미지'
   }
 }

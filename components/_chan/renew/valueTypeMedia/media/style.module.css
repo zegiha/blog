@@ -1,0 +1,95 @@
+.wrapper {
+  position: relative;
+  transition: none;
+  max-width: 100%;
+}
+
+.imageControl {
+  padding: var(--dimension-04);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.imageAndLoadingWrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  object-fit: cover;
+}
+
+.imageLoading {display: none;}
+
+.loading {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: var(--container-strong);
+  border-radius: var(--radius-16);
+  border: 1px solid var(--line-border);
+  z-index: 2;
+}
+
+.imageWidthControl, .imageWidthControlPosRight {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 30%;
+  background-color: var(--gray-40);
+  border: 1px solid var(--static-white);
+  border-radius: var(--radius-99);
+}
+
+.imageWidthControlPosRight {
+  left: calc(100% - 4px);
+  transform: translate(-100%, -50%);
+}
+
+.imageControlButtonGroup {
+  padding: var(--dimension-08);
+  background-color: var(--gray-40);
+  border: 1px solid var(--static-white);
+  border-radius: var(--radius-08);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.imageControlButton {
+  display: flex;
+  cursor: pointer;
+}
+
+.imageControlButton > svg {
+  fill: var(--static-white)
+}
+
+.imageAlignControlOptionWrapper {
+  position: relative;
+}
+
+.imageAlignControlOption {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translate(-50%, 100%);
+  background-color: var(--gray-40);
+  border: 1px solid var(--static-white);
+  padding: var(--dimension-04);
+  border-radius: var(--radius-04);
+}
+
+.imageControlActiveAlign{
+  fill: var(--static-white);
+}
+
+.imageControlAlign{
+  fill: var(--gray-30);
+}

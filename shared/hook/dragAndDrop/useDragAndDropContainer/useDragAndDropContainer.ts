@@ -59,6 +59,7 @@ export function useDragAndDropContainer<T>({
 
     clearClone()
 
+
     if(
       dragHoverIdx !== null &&
       dragHoverPosition

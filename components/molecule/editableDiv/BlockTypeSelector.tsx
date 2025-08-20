@@ -45,13 +45,6 @@ export default function BlockTypeSelector({ optionData, onContentTypeChange }: B
     }
   }
 
-  // useEffect(() => {
-  //   const firstElement = document.querySelector('[tabindex="0"]') as HTMLElement;
-  //   if (firstElement) {
-  //     firstElement.focus();
-  //   }
-  // }, []);
-
   return (
     <Col
       width={'fill-flex'}

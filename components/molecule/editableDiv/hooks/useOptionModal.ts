@@ -5,7 +5,7 @@ import { EditableDivProps } from '../types'
 import {TArticleContentType} from "@/widget/article/create/bodySection/BodySection";
 
 export function useOptionModal(props: EditableDivProps) {
-  const { content } = props
+  const { content, contentType } = props
   const [optionModalOpen, setOptionModalOpen] = useState<boolean>(false)
   const [optionData, setOptionData] = useState<Array<TArticleContentType>>(defaultOptionData)
 
@@ -16,16 +16,23 @@ export function useOptionModal(props: EditableDivProps) {
   }, [content])
 
   useEffect(() => {
+    if(contentType === 'image') {
+      setOptionData([...defaultOptionData])
+      return;
+    }
+
     if (content.trim() === '') {
-      setOptionData(defaultOptionData)
+      setOptionData([...defaultOptionData])
       setOptionModalOpen(false)
     }
     if (!optionModalOpen) return
 
     const newOptionData: Array<keyof TArticleContent> = []
     defaultOptionData.forEach(v => {
+      const parsedContent = content.toLowerCase().trim().replace(/(&nbsp;|\s)/g, '')
+      if (parsedContent === '') return
       const command = optionCommand[v]
-      if (command.some(c => c.slice(0, content.length) === content.trim() && content.trim() !== '')) {
+      if (command.some(c => c.slice(0, parsedContent.length) === parsedContent.trim() && parsedContent.trim() !== '')) {
         newOptionData.push(v)
       }
     })

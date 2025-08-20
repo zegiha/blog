@@ -270,7 +270,6 @@ html.dark {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Pretendard', sans-serif;
-  transition: all var(--transition-duration-normal) ease-in-out;
 }
 
 body {

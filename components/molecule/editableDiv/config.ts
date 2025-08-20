@@ -5,13 +5,15 @@ export const defaultOptionData: Array<keyof TArticleContent> = [
   'h2',
   'list',
   'content',
-  'footnote'
+  'footnote',
+  'image'
 ]
 
 export const optionCommand: { [K in keyof TArticleContent]: Array<string> } = {
-  h1: ['/제목1', '/h1', '/header1'],
-  h2: ['/제목2', '/h2', '/header2'],
+  h1: ['/제목1', '/h1', '/head1', '/header1'],
+  h2: ['/제목2', '/h2', '/head2', '/header2'],
   list: ['/리스트', '/list', '/bulleted', '/bullet'],
   content: ['/텍스트', '/content', '/text', '/p', '/paragraph'],
-  footnote: ['/작은글', '/주석', '/footnote', '/comment', '/small']
+  footnote: ['/작은글', '/주석', '/footnote', '/comment', '/small'],
+  image: ['/이미지', '/img', '/picture', '/image'],
 }
