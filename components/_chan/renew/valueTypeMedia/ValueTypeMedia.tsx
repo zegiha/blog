@@ -32,6 +32,7 @@ export default function ValueTypeMedia(props: IRenew) {
           type={'image'}
           url={prevUrl}
           position={props.position}
+          width={props.width}
           alt={props.alt}
           setValue={mediaSetValue}
         />

@@ -1,0 +1,33 @@
+.imageControl {
+  padding: var(--dimension-04);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.imageWidthControl, .imageWidthControlPosRight {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 30%;
+  background-color: var(--gray-40);
+  border: 1px solid var(--static-white);
+  border-radius: var(--radius-99);
+}
+
+.imageWidthControlPosRight {
+  left: calc(100% - 4px);
+  transform: translate(-100%, -50%);
+}
+
+.imageControlButtonGroup {
+  padding: var(--dimension-04);
+  background-color: var(--gray-40);
+  border: 1px solid var(--static-white);
+  border-radius: var(--radius-04);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}

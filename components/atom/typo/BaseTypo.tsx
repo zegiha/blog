@@ -2,7 +2,7 @@ import TTextColor from '@/shared/design/text/TTextColor'
 import TTextSize from '@/shared/design/text/TTextSize'
 import getWidth from '@/shared/design/width/getWidth'
 import TWidth from '@/shared/design/width/TWidth'
-import {createElement} from 'react'
+import {createElement, Ref} from 'react'
 import textSizeStyle from '../../../shared/design/text/textSize.module.css'
 import textWeightStyle from '../../../shared/design/text/textWeight.module.css'
 import textColorStyle from '../../../shared/design/text/textColor.module.css'
@@ -10,6 +10,7 @@ import style from './style.module.css'
 import cn from 'classnames'
 
 export interface IBaseTypo {
+  ref: Ref<HTMLElement>
   type: TTextSize
   color?: TTextColor
   accent?: boolean
@@ -18,10 +19,15 @@ export interface IBaseTypo {
   noFlexGrow?: boolean
   noFlexShrink?: boolean
   className?: string
+  contentEditable?: boolean
+  onInput?: (e: React.FormEvent<HTMLElement>) => void
+  onFocus?: (e: React.FocusEvent<HTMLElement>) => void
+  onBlur?: (e: React.FocusEvent<HTMLElement>) => void
   children?: string
 }
 
 export default function BaseTypo({
+  ref,
   type,
   color='normal',
   accent,
@@ -30,11 +36,16 @@ export default function BaseTypo({
   noFlexGrow=true,
   noFlexShrink=true,
   className,
+  contentEditable,
+  onInput,
+  onFocus,
+  onBlur,
   children,
 }: IBaseTypo) {
   return createElement(
     getTag(type),
     {
+      ref,
       className: cn(
         textSizeStyle[type],
         textColorStyle[color],
@@ -43,10 +54,14 @@ export default function BaseTypo({
         noFlexShrink && style.noFlexShrink,
         className,
       ),
+      onInput,
+      onFocus,
+      onBlur,
       style: {
         ...getWidth(width),
         textAlign,
-      }
+      },
+      contentEditable,
     },
     children
   )

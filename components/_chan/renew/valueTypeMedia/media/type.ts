@@ -5,5 +5,6 @@ export interface IMedia {
   url: string
   alt?: string
   position: IRenewMediaValue['position']
+  width?: IRenewMediaValue['width']
   setValue: (v: TNullableRenewMediaValue) => void
 }

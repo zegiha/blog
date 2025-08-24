@@ -1,5 +1,5 @@
-import {IRenewMediaValue} from '@/components/_chan/renew/()/type'
-import ImageControl from '@/components/_chan/renew/valueTypeMedia/media/ImageControl'
+import {TNullableRenewMediaValue} from '@/components/_chan/renew/()/type'
+import ImageControl from '@/components/_chan/renew/valueTypeMedia/media/imageControl/ImageControl'
 import {IMedia} from '@/components/_chan/renew/valueTypeMedia/media/type'
 import useMedia from '@/components/_chan/renew/valueTypeMedia/media/useMedia'
 import Col from '@/components/atom/flex/Col'
@@ -11,6 +11,7 @@ import style from './style.module.css'
 export default function Media(props: IMedia) {
   const {
     position,
+    width,
     url,
     alt,
     setValue,
@@ -19,9 +20,14 @@ export default function Media(props: IMedia) {
   const {
     mediaStatus,
     onLoad,
+    onLoadStart,
     hover,
     ref,
-    setRef
+    setRef,
+    setAltRef,
+    onAltInput,
+    onAltFocus,
+    onAltBlur,
   } = useMedia(props)
 
   return (
@@ -44,26 +50,34 @@ export default function Media(props: IMedia) {
             mediaStatus === 'loaded' && style.image,
             mediaStatus === 'loading' && style.imageLoading,
           )}
+          style={{width: width}}
           src={url}
           alt={alt ?? 'article image'}
+          onLoadStart={onLoadStart}
           onLoad={onLoad}
         />
         {mediaStatus === 'loading' && (
           <div className={style.loading}/>
         )}
         <Typo.small
-          className={cn(mediaStatus === 'loading' && style.imageLoading)}
+          ref={setAltRef}
+          className={cn(
+            mediaStatus === 'loading' && style.imageLoading,
+            style.alt
+          )}
           textAlign={'center'}
           color={'alternative'}
-        >
-          {alt ?? '눌러서 이미지 설명 입력하기'}
-        </Typo.small>
+          onInput={onAltInput}
+          onFocus={onAltFocus}
+          onBlur={onAltBlur}
+          contentEditable
+        />
         <ImageControl
           hover={hover}
           targetRef={ref}
           position={position}
-          changePosition={(v: IRenewMediaValue['position']) => {
-            setValue({position: v})
+          changeValue={(v: TNullableRenewMediaValue) => {
+            setValue(v)
           }}
         />
       </Col>

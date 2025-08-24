@@ -1,0 +1,7 @@
+.imageControlButton {
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
