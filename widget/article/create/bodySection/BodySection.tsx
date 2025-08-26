@@ -1,43 +1,50 @@
 'use client'
 
 import {ArticleContentSchema} from '@/app/api/article/route'
-import {IRenewMediaValue, IRenewTextValue} from '@/components/_chan/renew/()/type'
+import useBodySection from '@/components/_chan/renew/()/hook/useBodySection'
 import Col from '@/components/atom/flex/Col'
 import Renew from '@/components/_chan/renew/()/Renew'
 import {useDragAndDropContainer} from '@/shared/hook/dragAndDrop/useDragAndDropContainer/useDragAndDropContainer'
-import {useEffect, useState} from 'react'
 import OptionModal from "@/components/molecule/optionModal/OptionModal";
 import * as z from 'zod'
-import {renewDefaultData} from '@/components/_chan/renew/()/const'
+import style from './style.module.css'
 
 export type TArticleContentType = keyof z.infer<typeof ArticleContentSchema>
 
 export default function BodySection() {
-  const [renewData, setRenewData] = useState<
-    Array<
-      IRenewTextValue |
-      IRenewMediaValue
-    >
-  >([{...renewDefaultData}])
-  const [renewAutoFocus, setRenewAutoFocus] = useState<number | null>(0)
   const {
-    getDragProps: renewGetDragProps,
+    ref,
+    autoFocus,
+    setAutoFocus,
+    data,
+    setData,
+    // setFocus,
+  } = useBodySection()
+
+  const {
+    getDragProps,
   } = useDragAndDropContainer({
-    data: renewData,
-    setData: setRenewData
+    data: data,
+    setData: setData
   })
 
   return (
-    <Col width={'fill-width'} style={{zIndex: 1}}>
+    <Col
+      ref={ref}
+      className={style.container}
+      width={'fill-width'}
+      style={{zIndex: 1}}
+    >
       <OptionModal.anchor>
-        {renewData.map((v, i) => (
+        {data.map((v, i) => (
           <Renew
             key={i}
             idx={i}
-            autoFocus={renewAutoFocus === i}
-            setAutoFocusIdx={setRenewAutoFocus}
-            useDragAndDropParam={renewGetDragProps(i)}
-            {...{...v, setValue: setRenewData}}
+            autoFocus={autoFocus === i}
+            // changeFocus={(v) => setFocus(v)}
+            setAutoFocusIdx={setAutoFocus}
+            useDragAndDropParam={getDragProps(i)}
+            {...{...v, setValue: setData}}
           />
         ))}
       </OptionModal.anchor>

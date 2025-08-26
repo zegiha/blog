@@ -18,9 +18,14 @@ export default function useImageControl({
 
       const deltaX = e.clientX - startMousePosition.x
       const newWidth = startWidth - (direction === 'normal' ? deltaX : deltaX * -1)
-      ref.current.style.width = `${Math.max(newWidth, 100)}px`
 
-      changeValue({width: `${Math.max(newWidth, 100)}px`})
+      const parent = ref.current.parentElement
+      if(!parent) return
+      const parentWidth = parent.offsetWidth
+
+      ref.current.style.width = `${Math.min(Math.max(newWidth, 100), parentWidth)}px`
+
+      changeValue({width: `${Math.min(Math.max(newWidth, 100), parentWidth)}px`})
     }
 
     const handleMouseMoveClean = () => {

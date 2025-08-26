@@ -21,6 +21,8 @@ export default function useCommandOptionModal({
 
   const [optionData, setOptionData] = useState<Array<TArticleContentType>>([...defaultOptionData])
 
+  const [wrongWordCnt, setWrongWordCnt] = useState<number>(0)
+
   const processedChangeContentType = (type: TArticleContentType) => {
     changeContentType(type)
     setOpen(false)
@@ -32,7 +34,7 @@ export default function useCommandOptionModal({
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab' && !autoFocus) {
+      if(open && e.key === 'Tab' && !autoFocus) {
         e.preventDefault()
         e.stopPropagation()
         firstOptionRef.current?.focus()
@@ -92,8 +94,22 @@ export default function useCommandOptionModal({
     } else {
       setIsCorrectCommand(false)
     }
+
+    if(newOptionData.length === 0) {
+      setWrongWordCnt(p => p + 1)
+    } else {
+      setWrongWordCnt(0)
+    }
+
     setOptionData([...newOptionData])
   }, [content.at(-1)?.content, open]);
+
+  useEffect(() => {
+    if(!open) return
+
+    if(wrongWordCnt >= 5)
+      setOpen(false)
+  }, [wrongWordCnt, open])
 
   useEffect(() => {
     if(open && isCorrectCommand) {

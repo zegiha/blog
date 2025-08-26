@@ -5,10 +5,7 @@ import {useDragAndDrop} from '@/shared/hook/dragAndDrop/useDragAndDrop/useDragAn
 import useCallbackRef from '@/shared/hook/useCallbackRef'
 import {useEffect, useRef, useState} from 'react'
 
-export default function useRenewWrapper(props: IRenew) {
-  const {
-    useDragAndDropParam,
-  } = props
+export default function useRenewWrapper(useDragAndDropParam: IRenew['useDragAndDropParam']) {
 
   const {ref: dragAndDropTargetRef, onTargetMouseDown: onDragStart} = useDragAndDrop(useDragAndDropParam)
   const {ref: containerRef, refDependency: containerRefDependency, setRef: setContainerRef} = useCallbackRef<HTMLDivElement>()

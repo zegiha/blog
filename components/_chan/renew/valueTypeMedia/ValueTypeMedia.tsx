@@ -1,4 +1,4 @@
-import {RenewWrapper} from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
+import RenewWrapper from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
 import {IRenew} from '@/components/_chan/renew/()/type'
 import Media from '@/components/_chan/renew/valueTypeMedia/media/Media'
@@ -8,7 +8,7 @@ import useValueTypeMedia from '@/components/_chan/renew/valueTypeMedia/useValueT
 export default function ValueTypeMedia(props: IRenew) {
   if(props.type !== 'image')
     throw new Error('useValueTypeMedia: type must be image')
-  const hookValue = useRenewWrapper(props)
+  const hookValue = useRenewWrapper(props.useDragAndDropParam)
 
   const {
     prevUrl,

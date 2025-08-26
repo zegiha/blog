@@ -2,8 +2,9 @@ import changeTargetBlockTypeToNewType from '@/components/_chan/renew/()/helper/c
 import {IRenewSuper, IRenewTextValue} from '@/components/_chan/renew/()/type'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
 import CommandOptionModal from '@/components/_chan/renew/valueTypeText/commandOptionModal/CommandOptionModal'
+import {memo} from 'react'
 
-export default function ValueTypeTextSibling({
+function ValueTypeTextSibling({
   idx,
   value,
   setValue,
@@ -36,3 +37,16 @@ export default function ValueTypeTextSibling({
     </>
   )
 }
+
+export default memo(ValueTypeTextSibling, (prev, next) => (
+  prev.idx === next.idx &&
+    prev.value.length === next.value.length &&
+    prev.value.every((item, i) => {
+      const nextItem = next.value[i]
+      return item.content === nextItem.content &&
+        item.color === nextItem.color &&
+        item.accent === nextItem.accent &&
+        item.underline === nextItem.underline &&
+        item.italic === nextItem.italic
+    })
+))

@@ -26,6 +26,7 @@ export function useDragAndDrop(
 
     const handleMouseMove = (e: MouseEvent) => {
       if(ref.current === null) return
+
       const rect = ref.current.getBoundingClientRect()
       const range = rect.height
       const mousePos = e.clientY - rect.top

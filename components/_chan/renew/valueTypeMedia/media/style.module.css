@@ -9,6 +9,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 100%;
   object-fit: cover;
 }
 
@@ -24,8 +25,5 @@
 }
 
 .alt {
-  position: relative;
   z-index: 3;
-  outline: none;
-  border: none;
 }

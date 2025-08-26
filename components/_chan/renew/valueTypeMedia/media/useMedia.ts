@@ -11,7 +11,6 @@ export default function useMedia(
   const [hover, setHover] = useState<boolean>(false)
 
   const {
-    alt,
     setValue,
   } = props
 
@@ -46,22 +45,8 @@ export default function useMedia(
 
   useEffect(() => {
     if(!altRef.current) return
-
-    altRef.current.innerText = props.alt ?? '눌러서 이미지 설명 입력하기'
+    altRef.current.innerText = props.alt ?? ''
   }, [altRefDependency]);
-
-  const onAltFocus = () => {
-    if(!altRef.current) return
-    if(!alt) altRef.current.innerText = ''
-  }
-
-  const onAltBlur = () => {
-    if(!altRef.current) return
-    if(!alt) {
-      console.log('alt is null')
-      altRef.current.innerText = '눌러서 이미지 설명 입력하기'
-    }
-  }
 
   return {
     mediaStatus,
@@ -71,7 +56,5 @@ export default function useMedia(
     setRef,
     setAltRef,
     onAltInput,
-    onAltFocus,
-    onAltBlur,
   }
 }

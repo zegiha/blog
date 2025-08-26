@@ -1,0 +1,4 @@
+.container {
+  z-index: 1;
+  padding-bottom: var(--dimension-99);
+}

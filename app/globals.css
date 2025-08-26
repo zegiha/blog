@@ -274,6 +274,11 @@ html.dark {
 
 body {
   background-color: var(--background-normal);
+  tab-index: -1;
+}
+
+.nextjs-toast, .nextjs-toast>*, nextjs-portal {
+  tab-index: -1;
 }
 
 a {

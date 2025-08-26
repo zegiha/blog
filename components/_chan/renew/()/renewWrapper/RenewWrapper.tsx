@@ -9,7 +9,7 @@ import {ReactNode} from 'react'
 import style from '../style.module.css'
 import addNewBlock from '@/components/_chan/renew/()/helper/addNewBlock'
 
-export function RenewWrapper(
+function RenewWrapper(
   props: IRenew &
     {
       children?: ReactNode,
@@ -50,6 +50,7 @@ export function RenewWrapper(
         >
           {props.children && props.children}
           <ControlSection
+            idx={idx}
             show={hover}
             contentType={type}
             onDragButtonDrag={onDragStart}
@@ -62,3 +63,5 @@ export function RenewWrapper(
     </>
   )
 }
+
+export default RenewWrapper

@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  position: relative;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}

@@ -10,7 +10,7 @@ import style from './style.module.css'
 import cn from 'classnames'
 
 export interface IBaseTypo {
-  ref: Ref<HTMLElement>
+  ref?: Ref<HTMLElement>
   type: TTextSize
   color?: TTextColor
   accent?: boolean

@@ -37,6 +37,7 @@ export interface IRenewSuper {
   setValue: Dispatch<SetStateAction<Array<IRenewTextValue | IRenewMediaValue>>>
   autoFocus: boolean
   setAutoFocusIdx: Dispatch<SetStateAction<number | null>>
+  // changeFocus: (v: number | null) => void
 }
 
 export type IRenew = IRenewSuper & (IRenewTextValue | IRenewMediaValue)

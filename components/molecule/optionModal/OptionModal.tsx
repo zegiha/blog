@@ -6,11 +6,11 @@ import Row from '@/components/atom/flex/Row'
 import Typo from '@/components/atom/typo/Typo'
 import {IOptionModal} from '@/components/molecule/optionModal/type'
 import useOptionModal from '@/components/molecule/optionModal/useOptionModal'
-import {ReactNode} from 'react'
+import {ReactNode, RefObject} from 'react'
 import style from './style.module.css'
 
-function OptionModalAnchor({ children }: { children?: ReactNode }) {
-  return <div className={style.floatingWrapper}>{children}</div>
+function OptionModalAnchor({ ref, children }: { ref?: RefObject<HTMLDivElement>, children?: ReactNode }) {
+  return <div ref={ref} className={style.floatingWrapper}>{children}</div>
 }
 
 function OptionModalComponent({
@@ -38,7 +38,6 @@ function OptionModalComponent({
       <Col
         ref={ref}
         className={style.container}
-        // style={styleProps}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

@@ -1,4 +1,4 @@
-import {RenewWrapper} from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
+import RenewWrapper from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
 import {IRenew} from '@/components/_chan/renew/()/type'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
 import useValueTypeText from '@/components/_chan/renew/valueTypeText/hook/useValueTypeText'
@@ -9,25 +9,32 @@ import cn from 'classnames'
 import {useRef} from 'react'
 import style from './style.module.css'
 import useValueTypeTextKeyboardControl from '@/components/_chan/renew/valueTypeText/hook/useValueTypeTextKeyboardControl'
+import {memo} from 'react'
 
-export default function ValueTypeText(props: IRenew) {
+function ValueTypeText(props: IRenew) {
   if(props.type === 'image') return null
 
   const {
+    idx,
     type: contentType,
   } = props
 
   const ref = useRef<HTMLDivElement | null>(null)
 
   const {
+    focus,
     onInput,
+    onPaste,
     content,
-    onBlur
+    onFocus,
+    onBlur,
   } = useValueTypeText(ref, props)
 
-  const {onKeyDown} = useValueTypeTextKeyboardControl(ref, props)
+  const {
+    onKeyDown,
+  } = useValueTypeTextKeyboardControl(ref, props)
 
-  const hookValue = useRenewWrapper(props)
+  const hookValue = useRenewWrapper(props.useDragAndDropParam)
 
   return (
     <RenewWrapper
@@ -53,12 +60,15 @@ export default function ValueTypeText(props: IRenew) {
             style.input,
             style[contentType]
           )}
+          tabIndex={idx}
           contentEditable
           onInput={onInput}
           onKeyDown={onKeyDown}
+          onPaste={onPaste}
+          onFocus={onFocus}
           onBlur={onBlur}
         />
-        {content === '' && (
+        {focus && content === '' && (
           <div className={cn(style.placeholder, style[contentType])} style={{color: 'var(--label-alternative)'}}>
             내용 입력하기, /로 명령어 입력하기
           </div>
@@ -67,3 +77,21 @@ export default function ValueTypeText(props: IRenew) {
     </RenewWrapper>
   )
 }
+
+export default memo(ValueTypeText, (prev, next) => (
+  prev.idx === next.idx &&
+    prev.type === next.type &&
+    prev.type !== 'image' && next.type !== 'image' &&
+    prev.value.length === next.value.length &&
+    prev.value.every((item, i) => {
+      const nextItem = next.value[i]
+      return item.content === nextItem.content &&
+        item.color === nextItem.color &&
+        item.accent === nextItem.accent &&
+        item.underline === nextItem.underline &&
+        item.italic === nextItem.italic
+    }) &&
+    prev.autoFocus === next.autoFocus &&
+    prev.useDragAndDropParam.targetIdx === next.useDragAndDropParam.targetIdx &&
+    prev.useDragAndDropParam.isHoverAndPosition === next.useDragAndDropParam.isHoverAndPosition
+))

@@ -7,8 +7,9 @@ import cn from 'classnames'
 import {useEffect, useState, useRef} from 'react'
 import style from './style.module.css'
 import interactionStyle from '@/shared/design/interaction/interaction.module.css'
+import {memo} from 'react'
 
-export default function ControlSection({
+function ControlSection({
   show,
   contentType,
   onDragButtonDrag,
@@ -81,3 +82,9 @@ export default function ControlSection({
     </FadeInAndOut>
   )
 }
+
+export default memo(ControlSection, (prev, next) => (
+  prev.show === next.show &&
+    prev.contentType === next.contentType &&
+    prev.idx === next.idx
+))

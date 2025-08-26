@@ -4,7 +4,7 @@ import {IMedia} from '@/components/_chan/renew/valueTypeMedia/media/type'
 import useMedia from '@/components/_chan/renew/valueTypeMedia/media/useMedia'
 import Col from '@/components/atom/flex/Col'
 import Row from '@/components/atom/flex/Row'
-import Typo from '@/components/atom/typo/Typo'
+import EditableTypo from '@/components/atom/typo/editableTypo/EditableTypo'
 import cn from 'classnames'
 import style from './style.module.css'
 
@@ -20,14 +20,11 @@ export default function Media(props: IMedia) {
   const {
     mediaStatus,
     onLoad,
-    onLoadStart,
     hover,
     ref,
     setRef,
     setAltRef,
     onAltInput,
-    onAltFocus,
-    onAltBlur,
   } = useMedia(props)
 
   return (
@@ -42,7 +39,8 @@ export default function Media(props: IMedia) {
           }
         }}
         className={style.wrapper}
-        width={mediaStatus === 'loading' ? 'fill-width' : undefined}
+        width={'fill-width'}
+        style={{width: width}}
         gap={2}
       >
         <img
@@ -53,24 +51,19 @@ export default function Media(props: IMedia) {
           style={{width: width}}
           src={url}
           alt={alt ?? 'article image'}
-          onLoadStart={onLoadStart}
           onLoad={onLoad}
         />
         {mediaStatus === 'loading' && (
           <div className={style.loading}/>
         )}
-        <Typo.small
+        <EditableTypo.small
           ref={setAltRef}
-          className={cn(
-            mediaStatus === 'loading' && style.imageLoading,
-            style.alt
-          )}
-          textAlign={'center'}
+          className={mediaStatus === 'loading' ? style.imageLoading : undefined}
+          wrapperClassName={style.alt}
           color={'alternative'}
+          textAlign={'center'}
           onInput={onAltInput}
-          onFocus={onAltFocus}
-          onBlur={onAltBlur}
-          contentEditable
+          placeholder={'눌러서 이미지 설명 입력하기'}
         />
         <ImageControl
           hover={hover}

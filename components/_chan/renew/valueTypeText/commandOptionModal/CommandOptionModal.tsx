@@ -32,6 +32,7 @@ export default function CommandOptionModal(props: ICommandOptionModal) {
         width={'fill-flex'}
         className={style.list}
         onKeyDown={handleKeyDown}
+        // tabIndex={0}
       >
         {optionData.map((v, i) => (
           <Row
@@ -46,12 +47,14 @@ export default function CommandOptionModal(props: ICommandOptionModal) {
             )}
             gap={6}
             alignItems={'center'}
-            tabIndex={0} // 각 아이템이 포커스 가능하도록
+            tabIndex={i}
             onClick={() => changeContentType(v)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === 'Enter' && open) {
                 e.preventDefault()
                 changeContentType(v)
+              } else if(e.key === ' ' && open) {
+                onClose()
               }
             }}
           >

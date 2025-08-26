@@ -9,7 +9,7 @@ export default function handleKeyDown(e: React.KeyboardEvent) {
 
     const currentElement = e.target as HTMLElement
     const container = e.currentTarget
-    const focusableElements = container.querySelectorAll('[tabindex="0"]')
+    const focusableElements = container.children
     const currentIndex = Array.from(focusableElements).indexOf(currentElement)
 
     let nextIndex
