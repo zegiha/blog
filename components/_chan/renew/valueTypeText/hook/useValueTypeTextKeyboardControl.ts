@@ -3,12 +3,12 @@
 import changeTargetBlockTypeToNewType from '@/components/_chan/renew/()/helper/changeTargetBlockTypeToNewType'
 import {
   getTextLength,
-  moveCursor,
 } from '@/components/_chan/renew/valueTypeText/helper/useValueTypeTextKeyboardControl'
 import {IValueTypeText} from '@/components/_chan/renew/valueTypeText/type'
 import {useCallback} from 'react'
 import addNewBlock from '@/components/_chan/renew/()/helper/addNewBlock'
 import deleteTargetBlock from '@/components/_chan/renew/()/helper/deleteTargetBlock'
+import {getCaretVisualLineIndex} from "@/components/_chan/renew/valueTypeText/helper/getCaretVisualLineIndex";
 
 export default function useValueTypeTextKeyboardControl(
   ref: React.RefObject<HTMLDivElement | null>,
@@ -17,6 +17,8 @@ export default function useValueTypeTextKeyboardControl(
     type,
     value,
     setValue,
+    focusNextText,
+    focusPrevText,
     setAutoFocusIdx,
   }: IValueTypeText,
 ) {
@@ -63,63 +65,32 @@ export default function useValueTypeTextKeyboardControl(
       if(!up && !down && !left && !right) return
 
       const sel = window.getSelection()
-      if(sel === null) return
+      if(sel === null || !ref.current) return
 
-      const changeAutoFocusIdx = (idx: number) => {
-        setAutoFocusIdx(null)
-
-        if(ref.current)
-          ref.current.style.caretColor = 'transparent'
-
-        return new Promise<void>((resolve) => {
-          setTimeout(() => {
-            setAutoFocusIdx(idx)
-            resolve() // setTimeout 실행 완료 후 then으로 연결 가능
-          }, 0)
-        })
-      }
-
-      const cursorLocation = sel.focusOffset
+      const {lineCount, lineIndex: cursorY} = getCaretVisualLineIndex(ref.current)
+      const cursorX = sel.focusOffset
 
       if(up || down) {
-        e.preventDefault()
-
-        if(up) changeAutoFocusIdx(idx - 1)
-          .then(() => moveCursor(cursorLocation, () => {
-            if(ref.current)
-              ref.current.style.caretColor = 'auto'
-          }))
-        else changeAutoFocusIdx(idx + 1)
-          .then(() => moveCursor(cursorLocation, () => {
-            if(ref.current)
-              ref.current.style.caretColor = 'auto'
-          }))
-
-
+        if(up && cursorY === 0) {
+          e.preventDefault()
+          focusPrevText(idx, setAutoFocusIdx, {x: cursorX, y: cursorY})
+        }
+        else if(down && cursorY === lineCount - 1) {
+          e.preventDefault()
+          focusNextText(idx, setAutoFocusIdx, {x: cursorX, y: cursorY})
+        }
       } else {
         const cursorNode = sel.focusNode
 
         if(cursorNode === null) return
         const focusNodeTextLength = getTextLength(cursorNode)
 
-        if(left && cursorLocation === 0) {
+        if(left && cursorX === 0) {
           e.preventDefault()
-
-          changeAutoFocusIdx(idx - 1)
-            .then(() => {
-              moveCursor('end', () => {
-                if(ref.current)
-                  ref.current.style.caretColor = 'auto'
-              })
-            })
-        } else if(right && cursorLocation === focusNodeTextLength) {
+          focusPrevText(idx, setAutoFocusIdx, {x: cursorX, y: cursorY})
+        } else if(right && cursorX === focusNodeTextLength) {
           e.preventDefault()
-
-          changeAutoFocusIdx(idx + 1)
-            .then(() => moveCursor(0, () => {
-              if(ref.current)
-                ref.current.style.caretColor = 'auto'
-            }))
+          focusNextText(idx, setAutoFocusIdx, {x: cursorX, y: cursorY})
         }
       }
     }

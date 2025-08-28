@@ -8,6 +8,8 @@ import {useDragAndDropContainer} from '@/shared/hook/dragAndDrop/useDragAndDropC
 import OptionModal from "@/components/molecule/optionModal/OptionModal";
 import * as z from 'zod'
 import style from './style.module.css'
+import focusNextText from "@/components/_chan/renew/()/helper/focusNextText";
+import focusPrevText from "@/components/_chan/renew/()/helper/focusPrevText";
 
 export type TArticleContentType = keyof z.infer<typeof ArticleContentSchema>
 
@@ -18,7 +20,6 @@ export default function BodySection() {
     setAutoFocus,
     data,
     setData,
-    // setFocus,
   } = useBodySection()
 
   const {
@@ -41,10 +42,17 @@ export default function BodySection() {
             key={i}
             idx={i}
             autoFocus={autoFocus === i}
-            // changeFocus={(v) => setFocus(v)}
             setAutoFocusIdx={setAutoFocus}
             useDragAndDropParam={getDragProps(i)}
             {...{...v, setValue: setData}}
+            {...(v.type !== 'image' ? {
+              focusNextText: (i, s, l) => {
+                focusNextText(i, data, s, l)
+              },
+              focusPrevText: (i, s, l) => {
+                focusPrevText(i, data, s, l)
+              }
+            } : {})}
           />
         ))}
       </OptionModal.anchor>

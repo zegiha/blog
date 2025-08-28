@@ -11,6 +11,16 @@ export interface IRenewTextValue {
     underline?: boolean
     italic?: boolean
   }>
+  focusNextText: (
+    idx: number,
+    setAutoFocusIdx: Dispatch<SetStateAction<number | null>>,
+    cursorLocation: {x: number, y: number}
+  ) => void
+  focusPrevText: (
+    idx: number,
+    setAutoFocusIdx: Dispatch<SetStateAction<number | null>>,
+    cursorLocation: {x: number, y: number}
+  ) => void
   // setValue: Dispatch<SetStateAction<Array<{
   //   content: string
   //   color?: string
