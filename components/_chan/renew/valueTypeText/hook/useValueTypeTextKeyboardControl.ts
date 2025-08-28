@@ -80,20 +80,35 @@ export default function useValueTypeTextKeyboardControl(
       }
 
       const cursorLocation = sel.focusOffset
+      const el = sel.focusNode?.parentElement
+      if(!el) return
+
+      let lineIdx = 0, lineCount = 0
+      el.childNodes.forEach((v, i) => {
+        if(v.nodeType === Node.TEXT_NODE)
+          lineCount++
+        if(v === sel.focusNode)
+          lineIdx = lineCount
+      })
 
       if(up || down) {
-        e.preventDefault()
 
-        if(up) changeAutoFocusIdx(idx - 1)
-          .then(() => moveCursor(cursorLocation, () => {
-            if(ref.current)
-              ref.current.style.caretColor = 'auto'
-          }))
-        else changeAutoFocusIdx(idx + 1)
-          .then(() => moveCursor(cursorLocation, () => {
-            if(ref.current)
-              ref.current.style.caretColor = 'auto'
-          }))
+        if(up && lineIdx <= 1) {
+          e.preventDefault()
+          changeAutoFocusIdx(idx - 1)
+            .then(() => moveCursor('up', cursorLocation, () => {
+              if(ref.current)
+                ref.current.style.caretColor = 'auto'
+            }))
+        }
+        else if(down && lineIdx === lineCount) {
+          e.preventDefault()
+          changeAutoFocusIdx(idx + 1)
+            .then(() => moveCursor('down', cursorLocation, () => {
+              if(ref.current)
+                ref.current.style.caretColor = 'auto'
+            }))
+        }
 
 
       } else {
@@ -102,21 +117,19 @@ export default function useValueTypeTextKeyboardControl(
         if(cursorNode === null) return
         const focusNodeTextLength = getTextLength(cursorNode)
 
-        if(left && cursorLocation === 0) {
+        if(left && cursorLocation === 0 && lineIdx <= 1) {
           e.preventDefault()
-
           changeAutoFocusIdx(idx - 1)
             .then(() => {
-              moveCursor('end', () => {
+              moveCursor('up', 'end', () => {
                 if(ref.current)
                   ref.current.style.caretColor = 'auto'
               })
             })
-        } else if(right && cursorLocation === focusNodeTextLength) {
+        } else if(right && cursorLocation === focusNodeTextLength && lineIdx === lineCount) {
           e.preventDefault()
-
           changeAutoFocusIdx(idx + 1)
-            .then(() => moveCursor(0, () => {
+            .then(() => moveCursor('down', 0, () => {
               if(ref.current)
                 ref.current.style.caretColor = 'auto'
             }))

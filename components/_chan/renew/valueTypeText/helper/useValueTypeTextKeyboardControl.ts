@@ -17,6 +17,7 @@ export function getTextLength(node: Node): number {
 }
 
 export function moveCursor(
+  direction: 'up' | 'down',
   cursorLocation: number | 'end',
   revertCaretColor: () => void
 ) {
@@ -27,14 +28,20 @@ export function moveCursor(
     const focusNode = sel.focusNode
     if(focusNode === null) return
 
+    const focusTextNodes = (Array.from(focusNode.childNodes).filter(v => v.nodeType === Node.TEXT_NODE))
+
     const range = document.createRange()
 
-    const {node, offset} = resolveTextPosition(focusNode, cursorLocation)
+    const {offset} = resolveTextPosition(focusNode, cursorLocation)
+    const node = focusTextNodes[direction === 'down' ? 0 : focusTextNodes.length - 1]
 
     try {
       range.setStart(node, offset)
     } catch {
-      range.setStart(node, 0)
+      if(node === undefined)
+        range.setStart(focusNode, 0)
+      else
+        range.setStart(node, 0)
     }
     range.collapse(true)
 
