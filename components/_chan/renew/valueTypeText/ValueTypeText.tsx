@@ -1,5 +1,5 @@
 import RenewWrapper from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
-import {IRenew} from '@/components/_chan/renew/()/type'
+import {IRenewSuper, IRenewTextValue} from '@/components/_chan/renew/()/type'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
 import useValueTypeText from '@/components/_chan/renew/valueTypeText/hook/useValueTypeText'
 import ValueTypeTextSibling from '@/components/_chan/renew/valueTypeText/valueTypeTextSibling/ValueTypeTextSibling'
@@ -11,9 +11,7 @@ import style from './style.module.css'
 import useValueTypeTextKeyboardControl from '@/components/_chan/renew/valueTypeText/hook/useValueTypeTextKeyboardControl'
 import {memo} from 'react'
 
-function ValueTypeText(props: IRenew) {
-  if(props.type === 'image') return null
-
+function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
   const {
     idx,
     type: contentType,
@@ -81,7 +79,6 @@ function ValueTypeText(props: IRenew) {
 export default memo(ValueTypeText, (prev, next) => (
   prev.idx === next.idx &&
     prev.type === next.type &&
-    prev.type !== 'image' && next.type !== 'image' &&
     prev.value.length === next.value.length &&
     prev.value.every((item, i) => {
       const nextItem = next.value[i]

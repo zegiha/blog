@@ -41,7 +41,6 @@ export default function BodySection() {
             key={i}
             idx={i}
             autoFocus={autoFocus === i}
-            // changeFocus={(v) => setFocus(v)}
             setAutoFocusIdx={setAutoFocus}
             useDragAndDropParam={getDragProps(i)}
             {...{...v, setValue: setData}}
