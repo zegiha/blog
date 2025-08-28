@@ -84,7 +84,7 @@ export default function useValueTypeTextKeyboardControl(
       if(!el) return
 
       let lineIdx = 0, lineCount = 0
-      el.childNodes.forEach((v, i) => {
+      el.childNodes.forEach((v) => {
         if(v.nodeType === Node.TEXT_NODE)
           lineCount++
         if(v === sel.focusNode)
