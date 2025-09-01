@@ -3,7 +3,7 @@ import Row from '@/components/atom/flex/Row'
 import { Add, DragIndicator } from '@/components/atom/icon'
 import cn from 'classnames'
 import style from './style.module.css'
-import {TArticleContentType} from "@/widget/article/create/bodySection/BodySection";
+import {TArticleContentType} from "@/widget/article/create/[id]/bodySection/BodySection";
 
 interface ControlSectionProps {
   showControlSection: boolean

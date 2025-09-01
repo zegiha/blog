@@ -1,16 +1,19 @@
 import {IUseDragAndDrop} from '@/shared/hook/dragAndDrop/useDragAndDrop/type'
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 import {Dispatch, SetStateAction} from 'react'
+
+export type TRenewTextValueStyle = {
+  color?: string
+  accent?: boolean
+  underline?: boolean
+  italic?: boolean
+}
 
 export interface IRenewTextValue {
   type: Exclude<TArticleContentType, 'image'>
   value: Array<{
     content: string
-    color?: string
-    accent?: boolean
-    underline?: boolean
-    italic?: boolean
-  }>
+  } & TRenewTextValueStyle>
   // setValue: Dispatch<SetStateAction<Array<{
   //   content: string
   //   color?: string

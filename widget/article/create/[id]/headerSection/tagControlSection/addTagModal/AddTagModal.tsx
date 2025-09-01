@@ -9,7 +9,7 @@ import getWidth from '@/shared/design/width/getWidth'
 import TWidth from '@/shared/design/width/TWidth'
 import {Add} from '@/components/atom/icon'
 import cn from 'classnames'
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import OptionModal from '@/components/molecule/optionModal/OptionModal'
 import Istyle from './input.module.css'
 import style from './style.module.css'
@@ -22,9 +22,11 @@ export default function AddTagModal({
 }) {
   const [optionModalOpen, setOptionModalOpen] = useState<boolean>(false)
   const [tagName, setTagName] = useState<string>('')
-  const [existingTags, setExistingTags] = useState<Array<string>>(['test', 'test2'])
+  // const [existingTags, setExistingTags] = useState<Array<string>>(['test', 'test2'])
 
   const addTagHandler = () => {
+    if(!tagName) return
+
     addTag(tagName)
     setTagName('')
     setOptionModalOpen(false)
@@ -59,24 +61,24 @@ export default function AddTagModal({
             onTrailIconButtonClick={addTagHandler}
             onEnter={addTagHandler}
           />
-          {existingTags.length > 0 && (
-            <>
-              <Divider/>
-              <Col className={style.list} width={'fill-width'} gap={0}>
-                {existingTags.map((v, i) => (
-                  <ExistingTag
-                    key={i}
-                    content={v}
-                    onClick={() => {
-                      addTag(v)
-                      setTagName('')
-                      setOptionModalOpen(false)
-                    }}
-                  />
-                ))}
-              </Col>
-            </>
-          )}
+          {/*{existingTags.length > 0 && (*/}
+          {/*  <>*/}
+          {/*    <Divider/>*/}
+          {/*    <Col className={style.list} width={'fill-width'} gap={0}>*/}
+          {/*      {existingTags.map((v, i) => (*/}
+          {/*        <ExistingTag*/}
+          {/*          key={i}*/}
+          {/*          content={v}*/}
+          {/*          onClick={() => {*/}
+          {/*            addTag(v)*/}
+          {/*            setTagName('')*/}
+          {/*            setOptionModalOpen(false)*/}
+          {/*          }}*/}
+          {/*        />*/}
+          {/*      ))}*/}
+          {/*    </Col>*/}
+          {/*  </>*/}
+          {/*)}*/}
         </Col>
       </OptionModal.modal>
     </OptionModal.anchor>
@@ -118,11 +120,19 @@ function Input({
   onTrailIconButtonClick?: () => void,
   onEnter?: () => void,
 }) {
+  const ref = useRef<HTMLInputElement | null>(null)
   const [focus, setFocus] = useState<boolean>(false)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onEnter) {
-      onEnter()
+      e.preventDefault()
+
+      if(ref.current && e.nativeEvent.isComposing) {
+        const ev = new Event('compositionend', {bubbles: true})
+        ref.current.dispatchEvent(ev)
+      } else {
+        onEnter()
+      }
     }
   }
 
@@ -135,8 +145,10 @@ function Input({
       )}
     >
       <input
+        ref={ref}
         type='text'
         value={value}
+        autoFocus={true}
         onChange={onChange}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}

@@ -39,7 +39,6 @@ export default function Media(props: IMedia) {
           }
         }}
         className={style.wrapper}
-        width={'fill-width'}
         style={{width: width}}
         gap={2}
       >

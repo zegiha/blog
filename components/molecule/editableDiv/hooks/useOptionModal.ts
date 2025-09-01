@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { TArticleContent } from '@/app/api/article/route'
 import { defaultOptionData, optionCommand } from '../config'
 import { EditableDivProps } from '../types'
-import {TArticleContentType} from "@/widget/article/create/bodySection/BodySection";
+import {TArticleContentType} from "@/widget/article/create/[id]/bodySection/BodySection";
 
 export function useOptionModal(props: EditableDivProps) {
   const { content, contentType } = props

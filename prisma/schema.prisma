@@ -14,22 +14,25 @@ datasource db {
 }
 
 model User {
-  uuid     String @id @default(uuid(4))
+  uuid     String    @id @default(uuid(4))
   id       String
   passowrd String
+  articles Article[]
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISH
 }
 
 model Article {
-  uuid        String   @id @default(uuid(4))
+  uuid        String        @id @default(uuid(4))
   title       String
   description String
   content     Json
-  createdAt   DateTime @default(now())
-  tags        Tag[]    @relation("ArticlesOnTags") // M:N
-}
-
-model Tag {
-  uuid     String    @id @default(uuid(4))
-  name     String    @unique
-  articles Article[] @relation("ArticlesOnTags")
+  createdAt   DateTime      @default(now())
+  tags        Json
+  status      ArticleStatus @default(DRAFT)
+  User        User          @relation(fields: [userUuid], references: [uuid])
+  userUuid    String
 }

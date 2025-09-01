@@ -18,7 +18,6 @@ export default function BodySection() {
     setAutoFocus,
     data,
     setData,
-    // setFocus,
   } = useBodySection()
 
   const {
@@ -35,7 +34,7 @@ export default function BodySection() {
       width={'fill-width'}
       style={{zIndex: 1}}
     >
-      <OptionModal.anchor>
+      <OptionModal.anchor id={'bodySectionModalAnchor'}>
         {data.map((v, i) => (
           <Renew
             key={i}

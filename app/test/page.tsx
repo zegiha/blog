@@ -1,14 +1,39 @@
 'use client'
 
+import TextEditor from '@/components/_chan/TextEditor'
 import Col from '@/components/atom/flex/Col'
+import {useEffect, useRef} from 'react'
 import style from './style.module.css'
 
 export default function() {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if(!ref.current) return
+
+    ref.current.innerHTML = '<span>test1</span><span>test2</span><span>test3</span>'
+
+    const handleSelectionChange = () => {
+      const sel = window.getSelection()
+      if(!sel) return
+      Array.from({length: sel.rangeCount}).map((_, i) => {
+        console.log(i, sel.getRangeAt(i))
+      })
+    }
+
+    document.addEventListener('selectionchange', handleSelectionChange)
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange)
+    }
+  }, []);
+
   return (
-    // data-content-editable-selecting={true}
-    <div  className={style.test} style={{display: 'flex', flexDirection: 'column', gap: 24}}>
-      <div className={style.test} contentEditable content-editable-leaf="true">abc</div>
-      <div className={style.test}   contentEditable content-editable-leaf="true">123</div>
-    </div>
+    <>
+      <div
+        ref={ref}
+        contentEditable
+      />
+      <TextEditor/>
+    </>
   )
 }

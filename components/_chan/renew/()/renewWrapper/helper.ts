@@ -1,4 +1,4 @@
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 
 export default function getTopMarginDimensionByContentType(type: TArticleContentType) {
   if(type === 'h1' || type === 'h2' || type === 'image') return 16;

@@ -2,7 +2,7 @@
 
 import {TArticleContent} from '@/app/api/article/route'
 import {ICommandOptionModal} from '@/components/_chan/renew/valueTypeText/commandOptionModal/type'
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 import {useEffect, useRef, useState} from 'react'
 import defaultOptionData from '@/components/_chan/renew/valueTypeText/commandOptionModal/const/defaultOptionData'
 import optionCommand from '@/components/_chan/renew/valueTypeText/commandOptionModal/const/optionCommand'

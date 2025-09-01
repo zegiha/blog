@@ -1,4 +1,4 @@
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 
 export interface IControlSection {
   idx: number
@@ -6,4 +6,5 @@ export interface IControlSection {
   contentType: TArticleContentType
   onDragButtonDrag: (e: React.MouseEvent) => void
   onAddButtonClick: () => void
+  onDragButtonClick: () => void
 }

@@ -1,6 +1,6 @@
 import {IRenewTextValue} from '@/components/_chan/renew/()/type'
 import {IOptionModal} from '@/components/molecule/optionModal/type'
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 import {CSSProperties} from 'react'
 
 export interface ICommandOptionModal {

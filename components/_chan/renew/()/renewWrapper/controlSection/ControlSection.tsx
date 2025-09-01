@@ -1,5 +1,5 @@
-import {getTopPositionDimensioinByContentType} from '@/components/_chan/renew/controlSection/helper'
-import {IControlSection} from '@/components/_chan/renew/controlSection/type'
+import {getTopPositionDimensioinByContentType} from '@/components/_chan/renew/()/renewWrapper/controlSection/helper'
+import {IControlSection} from '@/components/_chan/renew/()/renewWrapper/controlSection/type'
 import FadeInAndOut from '@/components/atom/fadeInAndOut/FadeInAndOut'
 import Row from '@/components/atom/flex/Row'
 import {Add, DragIndicator} from '@/components/atom/icon'
@@ -14,27 +14,15 @@ function ControlSection({
   contentType,
   onDragButtonDrag,
   onAddButtonClick,
+  onDragButtonClick,
 }: IControlSection) {
   const [mouseDown, setMouseDown] = useState<boolean>(false)
   const [mouseMoved, setMouseMoved] = useState<boolean>(false)
   const mouseDownEventRef = useRef<React.MouseEvent | null>(null)
 
   useEffect(() => {
-    const handleMouseUp = () => {
-      setMouseDown(false)
-      setMouseMoved(false)
-      mouseDownEventRef.current = null
-    }
-
-    if(mouseDown)
-      document.body.addEventListener('mouseup', handleMouseUp)
-
     if(mouseDown && mouseMoved && mouseDownEventRef.current !== null) {
       onDragButtonDrag(mouseDownEventRef.current)
-    }
-
-    return () => {
-      document.body.removeEventListener('mouseup', handleMouseUp)
     }
   }, [mouseDown, mouseMoved]);
 
@@ -69,10 +57,24 @@ function ControlSection({
               setMouseDown(true)
             }
           }}
-          onMouseMove={() => {
-            if(mouseDown) {
+          onMouseMove={(e) => {
+            if(!mouseDownEventRef.current) return
+
+            const movedBeyond4px = Math.hypot(
+              e.clientX - mouseDownEventRef.current.clientX,
+              e.clientY - mouseDownEventRef.current.clientY
+            ) >= 4
+
+            if(mouseDown && movedBeyond4px) {
               setMouseMoved(true)
             }
+          }}
+          onMouseUp={() => {
+            if(mouseDown && !mouseMoved) onDragButtonClick()
+
+            setMouseDown(false)
+            setMouseMoved(false)
+            mouseDownEventRef.current = null
           }}
           onContextMenu={(e) => e.preventDefault()}
         >

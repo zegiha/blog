@@ -1,4 +1,4 @@
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 
 const optionCommand: { [K in TArticleContentType]: Array<string> } = {
   h1: ['/제목1', '/h1', '/head1', '/header1'],

@@ -22,6 +22,7 @@ export function moveCursor(
   revertCaretColor: () => void
 ) {
   setTimeout(() => {
+
     const sel = window.getSelection()
     if(sel === null) return
 

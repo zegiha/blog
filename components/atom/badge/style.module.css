@@ -3,3 +3,5 @@
   border-radius: var(--radius-06);
   background-color: var(--component-fill-normal);
 }
+
+.container::before {border-radius: var(--radius-06);}

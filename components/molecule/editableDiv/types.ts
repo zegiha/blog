@@ -2,7 +2,7 @@ import { IUseDragAndDrop } from '@/shared/hook/dragAndDrop/useDragAndDrop/type'
 import TWidth from "@/shared/design/width/TWidth";
 import TTextSize from "@/shared/design/text/TTextSize";
 import TTextColor from "@/shared/design/text/TTextColor";
-import {TArticleContentType} from "@/widget/article/create/bodySection/BodySection";
+import {TArticleContentType} from "@/widget/article/create/[id]/bodySection/BodySection";
 
 export interface EditableDivProps {
   width?: TWidth

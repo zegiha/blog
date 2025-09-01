@@ -1,17 +1,21 @@
 import Typo from '@/components/atom/typo/Typo'
+import cn from 'classnames'
 import style from './style.module.css'
+import interactionStyle from '@/shared/design/interaction/interaction.module.css'
 
 interface IBadge {
   size: 'small' | 'medium'
   children: string
+  onClick?: () => void
 }
 
 export default function Badge({
   size,
-  children
+  children,
+  onClick,
 }: IBadge) {
   return (
-    <div className={style.container}>
+    <div className={cn(interactionStyle.interaction, style.container)} onClick={onClick}>
       <BadgeTypo size={size}>
         {children}
       </BadgeTypo>

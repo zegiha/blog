@@ -1,0 +1,19 @@
+.buttonContainer {
+  padding: var(--dimension-02) var(--dimension-08);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: var(--radius-04);
+}
+
+.deleteButtonContainer {
+  transition: background-color var(--transition-duration-fast) ease-in-out;
+}
+
+.deleteButtonContainer:hover, .deleteButtonContainer:active{
+  background-color: var(--status-translucent-negative);
+}
+
+.buttonContainer::before {
+  border-radius: var(--radius-04);
+}

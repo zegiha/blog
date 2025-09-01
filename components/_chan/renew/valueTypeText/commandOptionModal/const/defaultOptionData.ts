@@ -1,4 +1,4 @@
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 
 const defaultOptionData: Array<TArticleContentType> = [
   'h1',

@@ -1,5 +1,5 @@
 import {IRenewSuper} from '@/components/_chan/renew/()/type'
-import {TArticleContentType} from '@/widget/article/create/bodySection/BodySection'
+import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 import {renewDefaultTextData, renewDefaultMediaData} from '@/components/_chan/renew/()/const'
 
 export default function changeTargetBlockTypeToNewType(
@@ -7,9 +7,22 @@ export default function changeTargetBlockTypeToNewType(
   idx: IRenewSuper['idx'],
   setValue: IRenewSuper['setValue'],
   setAutoFocusIdx: IRenewSuper['setAutoFocusIdx'],
+  saveData?: boolean
 ) {
   setValue(p => {
     if(newType === p[idx].type) return [...p]
+
+    if(
+      saveData &&
+      newType !== 'image' &&
+      p[idx].type !== 'image'
+    ) {
+      return ([
+        ...p.slice(0, idx),
+        {...p[idx], type: newType},
+        ...p.slice(idx + 1),
+      ])
+    }
 
     if(newType === 'image') {
       return ([

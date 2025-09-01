@@ -5,7 +5,7 @@ import cn from 'classnames'
 import interactionStyle from '@/shared/design/interaction/interaction.module.css'
 import style from './style.module.css'
 import { textTypeEl } from './textTypeEl'
-import {TArticleContentType} from "@/widget/article/create/bodySection/BodySection";
+import {TArticleContentType} from "@/widget/article/create/[id]/bodySection/BodySection";
 import {useEffect} from "react";
 
 interface BlockTypeSelectorProps {

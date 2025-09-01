@@ -2,6 +2,7 @@ import RenewWrapper from '@/components/_chan/renew/()/renewWrapper/RenewWrapper'
 import {IRenewSuper, IRenewTextValue} from '@/components/_chan/renew/()/type'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
 import useValueTypeText from '@/components/_chan/renew/valueTypeText/hook/useValueTypeText'
+import useValueTypeTextEdit from '@/components/_chan/renew/valueTypeText/hook/useValueTypeTextEdit'
 import ValueTypeTextSibling from '@/components/_chan/renew/valueTypeText/valueTypeTextSibling/ValueTypeTextSibling'
 import Row from '@/components/atom/flex/Row'
 import {List} from '@/components/atom/icon'
@@ -9,9 +10,8 @@ import cn from 'classnames'
 import {useRef} from 'react'
 import style from './style.module.css'
 import useValueTypeTextKeyboardControl from '@/components/_chan/renew/valueTypeText/hook/useValueTypeTextKeyboardControl'
-import {memo} from 'react'
 
-function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
+export default function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
   const {
     idx,
     type: contentType,
@@ -27,6 +27,10 @@ function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
     onFocus,
     onBlur,
   } = useValueTypeText(ref, props)
+
+  const {
+    addTest
+  } = useValueTypeTextEdit(ref, props)
 
   const {
     onKeyDown,
@@ -71,24 +75,9 @@ function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
             내용 입력하기, /로 명령어 입력하기
           </div>
         )}
+        <div onClick={addTest} style={{width: 300, height: 300, background: 'red'}}>
+        </div>
       </Row>
     </RenewWrapper>
   )
 }
-
-export default memo(ValueTypeText, (prev, next) => (
-  prev.idx === next.idx &&
-    prev.type === next.type &&
-    prev.value.length === next.value.length &&
-    prev.value.every((item, i) => {
-      const nextItem = next.value[i]
-      return item.content === nextItem.content &&
-        item.color === nextItem.color &&
-        item.accent === nextItem.accent &&
-        item.underline === nextItem.underline &&
-        item.italic === nextItem.italic
-    }) &&
-    prev.autoFocus === next.autoFocus &&
-    prev.useDragAndDropParam.targetIdx === next.useDragAndDropParam.targetIdx &&
-    prev.useDragAndDropParam.isHoverAndPosition === next.useDragAndDropParam.isHoverAndPosition
-))

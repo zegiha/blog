@@ -1,11 +1,14 @@
+import changeTargetBlockTypeToNewType from '@/components/_chan/renew/()/helper/changeTargetBlockTypeToNewType'
+import deleteTargetBlock from '@/components/_chan/renew/()/helper/deleteTargetBlock'
 import getTopMarginDimensionByContentType from '@/components/_chan/renew/()/renewWrapper/helper'
+import OptionControl from '@/components/_chan/renew/()/renewWrapper/optionControl/OptionControl'
 import useRenewWrapper from '@/components/_chan/renew/()/renewWrapper/useRenewWrapper'
-import ControlSection from '@/components/_chan/renew/controlSection/ControlSection'
+import ControlSection from '@/components/_chan/renew/()/renewWrapper/controlSection/ControlSection'
 import {IRenew} from '@/components/_chan/renew/()/type'
 import Col from '@/components/atom/flex/Col'
 import Row from '@/components/atom/flex/Row'
 import cn from 'classnames'
-import {ReactNode} from 'react'
+import {ReactNode, useState} from 'react'
 import style from '../style.module.css'
 import addNewBlock from '@/components/_chan/renew/()/helper/addNewBlock'
 
@@ -30,6 +33,8 @@ function RenewWrapper(
     }
   } = props
 
+  const [optionControlOpen, setOptionControlOpen] = useState<boolean>(false)
+
   return (
     <>
       <Col
@@ -37,7 +42,7 @@ function RenewWrapper(
           dragAndDropTargetRef.current = el
           setContainerRef(el)
         }}
-        className={style.container}
+        className={cn(style.container, type+'Block')}
         width={'fill-flex'}
       >
         <Row
@@ -51,15 +56,32 @@ function RenewWrapper(
           {props.children && props.children}
           <ControlSection
             idx={idx}
-            show={hover}
+            show={hover || optionControlOpen}
             contentType={type}
-            onDragButtonDrag={onDragStart}
-            onAddButtonClick={() =>
-              addNewBlock(idx, setAutoFocusIdx, setValue)}
+            onDragButtonDrag={(e) => {
+              setOptionControlOpen(false)
+              onDragStart(e)
+            }}
+            onAddButtonClick={() => {
+              setOptionControlOpen(false)
+              addNewBlock(idx, setAutoFocusIdx, setValue)
+            }}
+            onDragButtonClick={() => {
+              setOptionControlOpen(p => !p)
+            }}
           />
         </Row>
       </Col>
       {props.sibling && props.sibling}
+
+      <OptionControl
+        open={optionControlOpen}
+        onClose={() => setOptionControlOpen(false)}
+        deleteBlock={() => deleteTargetBlock(idx, setAutoFocusIdx, setValue)}
+        changeBlockType={(v) => {
+          changeTargetBlockTypeToNewType(v, idx, setValue, setAutoFocusIdx, true)
+        }}
+      />
     </>
   )
 }

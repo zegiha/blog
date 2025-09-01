@@ -9,8 +9,8 @@ import useOptionModal from '@/components/molecule/optionModal/useOptionModal'
 import {ReactNode, RefObject} from 'react'
 import style from './style.module.css'
 
-function OptionModalAnchor({ ref, children }: { ref?: RefObject<HTMLDivElement>, children?: ReactNode }) {
-  return <div ref={ref} className={style.floatingWrapper}>{children}</div>
+function OptionModalAnchor({ ref, id, children }: { ref?: RefObject<HTMLDivElement | null>, id?: string, children?: ReactNode }) {
+  return <div ref={ref} id={id} className={style.floatingWrapper}>{children}</div>
 }
 
 function OptionModalComponent({
