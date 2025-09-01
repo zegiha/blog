@@ -10,6 +10,7 @@ export default function ValueTypeMedia(props: IRenewSuper & IRenewMediaValue) {
     throw new Error('useValueTypeMedia: type must be image')
   const hookValue = useRenewWrapper(props.useDragAndDropParam)
 
+
   const {
     prevUrl,
     handleFileInput,

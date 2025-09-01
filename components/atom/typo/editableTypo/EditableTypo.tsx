@@ -13,8 +13,7 @@ interface IEditableTypo extends Omit<IBaseTypo, 'type' | 'children' | 'contentEd
 }
 
 function createEditableTypo(type: IBaseTypo['type']) {
-
-  return (props: IEditableTypo) => {
+  const Component = (props: IEditableTypo) => {
     const {ref: _, ...placeholderProps} = props
 
     const {
@@ -76,6 +75,10 @@ function createEditableTypo(type: IBaseTypo['type']) {
       </div>
     )
   }
+
+  Component.displayName = `EditableTypo.${type}`
+
+  return Component
 }
 
 const EditableTypo = {

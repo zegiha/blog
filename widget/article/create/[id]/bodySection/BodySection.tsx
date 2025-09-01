@@ -1,9 +1,9 @@
 'use client'
 
-import {ArticleContentSchema} from '@/app/api/article/route'
 import useBodySection from '@/components/_chan/renew/()/hook/useBodySection'
 import Col from '@/components/atom/flex/Col'
 import Renew from '@/components/_chan/renew/()/Renew'
+import {ArticleContentSchema} from '@/entity/article/ArticleContentSchema'
 import {useDragAndDropContainer} from '@/shared/hook/dragAndDrop/useDragAndDropContainer/useDragAndDropContainer'
 import OptionModal from "@/components/molecule/optionModal/OptionModal";
 import * as z from 'zod'
@@ -19,7 +19,6 @@ export default function BodySection() {
     data,
     setData,
   } = useBodySection()
-
   const {
     getDragProps,
   } = useDragAndDropContainer({

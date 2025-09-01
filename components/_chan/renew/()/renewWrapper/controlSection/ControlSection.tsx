@@ -24,7 +24,7 @@ function ControlSection({
     if(mouseDown && mouseMoved && mouseDownEventRef.current !== null) {
       onDragButtonDrag(mouseDownEventRef.current)
     }
-  }, [mouseDown, mouseMoved]);
+  }, [mouseDown, mouseMoved, onDragButtonDrag]);
 
   return (
     <FadeInAndOut show={show}>

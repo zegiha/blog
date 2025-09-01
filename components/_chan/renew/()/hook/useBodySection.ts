@@ -11,11 +11,8 @@ export default function useBodySection() {
       IRenewTextValue |
       IRenewMediaValue
     >
-  >([{...renewDefaultData,
-    value: [{
-    content: Array.from({length: 11}).map((_, i) => `${i}`).join(' ')
-    }]
-  }])
+  >([{...renewDefaultData}])
+  const [isInit, setIsInit] = useState<boolean>(false)
 
   useEffect(() => {
     const endIdx = data.length - 1
@@ -35,8 +32,29 @@ export default function useBodySection() {
   const {id} = useParams<{id: string}>()
 
   useEffect(() => {
+    if(!id) return
+
+    const init = async () => {
+      const res = await fetch(`/api/article/save/${id}?select=content`)
+      const json = await res.json()
+      if(
+        !(!res.ok ||
+        json.content === undefined ||
+        json.content === null ||
+        json.content.length === 0)
+      ) {
+        setData(json.content)
+      }
+    }
+    init()
+      .finally(() => setIsInit(true))
+  }, [id]);
+
+  useEffect(() => {
+    if(!id) return
+
     const updateContent = async () => {
-      await fetch(`/api/article/${id}`, {
+      await fetch(`/api/article/save/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -46,8 +64,8 @@ export default function useBodySection() {
         }),
       })
     }
-    // updateContent()
-  }, [data]);
+    if(isInit) updateContent()
+  }, [data, isInit, id]);
 
   const ref = useRef<HTMLDivElement | null>(null)
   const [autoFocus, setAutoFocus] = useState<number | null>(0)

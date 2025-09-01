@@ -67,7 +67,7 @@ function resolveTextPosition(root: Node, index: number | 'end')
   }
 
   // 음수 인덱스는 0으로
-  let targetIndex = Math.max(0, index === 'end' ? Infinity : index);
+  const targetIndex = Math.max(0, index === 'end' ? Infinity : index);
 
   // 총 길이 파악과 동시에 대상 위치 탐색
   let accumulated = 0;

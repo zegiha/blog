@@ -7,15 +7,19 @@ interface IBadge {
   size: 'small' | 'medium'
   children: string
   onClick?: () => void
+  interaction?: boolean
 }
 
 export default function Badge({
   size,
   children,
   onClick,
+  interaction=true,
 }: IBadge) {
   return (
-    <div className={cn(interactionStyle.interaction, style.container)} onClick={onClick}>
+    <div className={cn(
+      interaction && interactionStyle.interaction,
+      style.container)} onClick={onClick}>
       <BadgeTypo size={size}>
         {children}
       </BadgeTypo>

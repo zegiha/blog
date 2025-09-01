@@ -113,6 +113,6 @@ export default function useOptionModal({
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [open, refDependency, style])
+  }, [open, refDependency, style, onClose])
   return setRef
 }

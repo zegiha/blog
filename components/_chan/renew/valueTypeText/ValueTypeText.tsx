@@ -6,8 +6,9 @@ import useValueTypeTextEdit from '@/components/_chan/renew/valueTypeText/hook/us
 import ValueTypeTextSibling from '@/components/_chan/renew/valueTypeText/valueTypeTextSibling/ValueTypeTextSibling'
 import Row from '@/components/atom/flex/Row'
 import {List} from '@/components/atom/icon'
+import ColorPicker from '@/components/atom/colorPicker/ColorPicker'
 import cn from 'classnames'
-import {useRef} from 'react'
+import {useRef, useState} from 'react'
 import style from './style.module.css'
 import useValueTypeTextKeyboardControl from '@/components/_chan/renew/valueTypeText/hook/useValueTypeTextKeyboardControl'
 
@@ -18,6 +19,7 @@ export default function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
   } = props
 
   const ref = useRef<HTMLDivElement | null>(null)
+  const [showColorPicker, setShowColorPicker] = useState(false)
 
   const {
     focus,
@@ -29,7 +31,12 @@ export default function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
   } = useValueTypeText(ref, props)
 
   const {
-    addTest
+    hasSelection,
+    getSelectedColor,
+    toggleAccent,
+    toggleItalic,
+    toggleUnderline,
+    changeColor,
   } = useValueTypeTextEdit(ref, props)
 
   const {
@@ -75,8 +82,48 @@ export default function ValueTypeText(props: IRenewSuper & IRenewTextValue) {
             내용 입력하기, /로 명령어 입력하기
           </div>
         )}
-        <div onClick={addTest} style={{width: 300, height: 300, background: 'red'}}>
-        </div>
+        {hasSelection && (
+          <div className={style.textEditToolbar}>
+            <button 
+              onClick={toggleAccent}
+              className={style.toolbarButton}
+              title="굵게 (Bold)"
+            >
+              B
+            </button>
+            <button 
+              onClick={toggleItalic}
+              className={style.toolbarButton}
+              title="기울임 (Italic)"
+            >
+              I
+            </button>
+            <button 
+              onClick={toggleUnderline}
+              className={style.toolbarButton}
+              title="밑줄 (Underline)"
+            >
+              U
+            </button>
+            <div className={style.colorPickerContainer}>
+              <button 
+                onClick={() => setShowColorPicker(!showColorPicker)}
+                className={cn(style.toolbarButton, style.colorButton)}
+                title="색상 변경"
+              >
+                A
+              </button>
+              {showColorPicker && (
+                <ColorPicker
+                  value={getSelectedColor()}
+                  onChange={changeColor}
+                  onClose={() => setShowColorPicker(false)}
+                  show={showColorPicker}
+                />
+              )}
+            </div>
+          </div>
+        )}
       </Row>
     </RenewWrapper>
   )

@@ -1,47 +1,24 @@
+import prisma from '@/shared/const/prisma'
 import {NextRequest, NextResponse} from 'next/server'
-import * as z from 'zod'
 
-export const ArticleContentSchema = z.object({
-  'h1': z.string(),
-  'h2': z.string(),
-  content: z.string(),
-  list: z.array(z.string()),
-  footnote: z.string(),
-  image: z.object({
-    src: z.string(),
-    alt: z.string(),
-    position: z.enum(['small', 'medium', 'large']),
-    size: z.object({
-      width: z.string(),
-      height: z.string(),
-    }),
-  })
-})
+export async function POST(_: NextRequest) {
+  try {
+    const res = await prisma.article.create({
+      data: {
+        title: '',
+        description: '',
+        tags: [],
+        content: '',
+        status: 'DRAFT',
+        userUuid: '89bdc438-7583-49c1-a43b-1dd325db0344',
+      }
+    })
 
-export type TArticleContent = z.infer<typeof ArticleContentSchema>
-
-const ArticleSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  content: ArticleContentSchema,
-  createdAt: z.date(),
-  tags: z.array(z.string()),
-})
-
-export async function POST(request: NextRequest) {
-  // const reqData = await request.json()
-  // const articleData = ArticleSchema.safeParse({
-  //   title: reqFormdata.get('title'),
-  //   content: reqFormdata.get('content'),
-  //   createdAt: reqFormdata.get('createdAt'),
-  //   tags: reqFormdata.get('tags'),
-  // })
-  //
-  // if(!articleData.success) {
-  //   return new NextResponse(articleData.error.message, {status: 400})
-  // }
-
-  // TODO push to db the data
-
-  return new NextResponse('ok')
+    return new NextResponse(JSON.stringify({
+      uuid: res.uuid,
+    }))
+  } catch(e) {
+    console.error(e)
+    return new NextResponse('Internal Server Error', {status: 500})
+  }
 }

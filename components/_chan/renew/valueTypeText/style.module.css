@@ -52,3 +52,67 @@
   line-height: var(--typo-small-line-height);
   color: var(--label-alternative);
 }
+
+.textEditToolbar {
+  position: absolute;
+  top: -48px;
+  left: 0;
+  z-index: 10;
+  
+  display: flex;
+  gap: var(--dimension-04);
+  padding: var(--dimension-08);
+  
+  background: var(--background-elevated);
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-16);
+  box-shadow: 0 6px 8px 4px var(--shadow-normal);
+}
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 32px;
+  height: 32px;
+  
+  background: transparent;
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-08);
+  color: var(--label-normal);
+  
+  font-size: var(--typo-small-font-size);
+  font-weight: var(--typo-font-weight-accent);
+  
+  cursor: pointer;
+  transition: all var(--transition-duration-fast) ease;
+}
+
+.toolbarButton:hover {
+  background: var(--interaction-hover);
+  border-color: var(--line-border);
+}
+
+.toolbarButton:active {
+  background: var(--interaction-active);
+}
+
+.colorPickerContainer {
+  position: relative;
+}
+
+.colorButton {
+  background: linear-gradient(
+    135deg,
+    #FF477E 0%,
+    #F53134 25%,
+    #29C257 50%,
+    #2E86F5 75%,
+    #FFAA00 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: var(--typo-font-weight-accent);
+}

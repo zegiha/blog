@@ -1,4 +1,4 @@
-import {IRenew} from '@/components/_chan/renew/()/type'
+import {IRenew,TRenewTextValueStyleAndContent} from '@/components/_chan/renew/()/type'
 import ValueTypeMedia from '@/components/_chan/renew/valueTypeMedia/ValueTypeMedia'
 import ValueTypeText from '@/components/_chan/renew/valueTypeText/ValueTypeText'
 import {memo} from 'react'
@@ -12,6 +12,7 @@ function Renew(props: IRenew) {
 }
 
 export default memo(Renew, (p, n) => {
+  if(p.idx !== n.idx) return false;
   if (p.type === 'image' && n.type === 'image') return (
     p.src === n.src &&
       p.width === n.width &&
@@ -23,7 +24,7 @@ export default memo(Renew, (p, n) => {
   else if (p.type !== 'image' && n.type !== 'image') return (
     p.type === n.type &&
     p.value.length === n.value.length &&
-    p.value.every((item: any, i: number) => {
+    p.value.every((item: TRenewTextValueStyleAndContent, i: number) => {
       const nItem = n.value[i]
       return item.content === nItem.content &&
         item.color === nItem.color &&

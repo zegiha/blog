@@ -1,7 +1,7 @@
 'use client'
 
-import {TArticleContent} from "@/app/api/article/route";
 import Photo from '@/components/atom/icon/Photo'
+import {TArticleContent} from '@/entity/article/ArticleContentSchema'
 import {ReactNode} from "react";
 import {FormatListBulleted, H1, H2, Text, X2} from "@/components/atom/icon";
 

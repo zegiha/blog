@@ -7,11 +7,22 @@ import {useEffect, useState} from 'react'
 export default function TagControlSection() {
   const {id} = useParams<{id: string}>()
 
+  const [isInit, setIsInit] = useState<boolean>(false)
   const [tags, setTags] = useState<Array<string>>([])
 
   useEffect(() => {
+    const init = async () => {
+      const res = await fetch(`/api/article/save/${id}?select=tags`)
+      const data = await res.json()
+      setTags(data.tags)
+      setIsInit(true)
+    }
+    init()
+  }, []);
+
+  useEffect(() => {
     const updateTags = async () => {
-      const res = await fetch(`/api/article/${id}`, {
+      await fetch(`/api/article/save/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -21,8 +32,8 @@ export default function TagControlSection() {
         })
       })
     }
-    updateTags()
-  }, [tags])
+    if(isInit) updateTags()
+  }, [tags, isInit])
 
   return (
     <Row gap={8} alignItems={'center'} wrap>

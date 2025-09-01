@@ -1,0 +1,142 @@
+.colorPicker {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  z-index: 20;
+  
+  min-width: 200px;
+  padding: var(--dimension-08);
+  
+  background: var(--background-elevated);
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-16);
+  box-shadow: 0 6px 8px 4px var(--shadow-normal);
+}
+
+.presetColors {
+  margin-bottom: var(--dimension-08);
+}
+
+.presetColorButton {
+  width: 24px;
+  height: 24px;
+  
+  border: 2px solid transparent;
+  border-radius: var(--radius-06);
+  cursor: pointer;
+  transition: all var(--transition-duration-fast) ease;
+  
+  position: relative;
+}
+
+.presetColorButton:hover {
+  border-color: var(--line-border);
+  transform: scale(1.05);
+}
+
+.presetColorButton.selected {
+  border-color: var(--line-border);
+  box-shadow: 0 0 0 2px var(--background-elevated), 0 0 0 4px var(--line-border);
+}
+
+/* 흰색 버튼은 특별한 테두리 처리 */
+.presetColorButton[style*="background-color: #FFFFFF"],
+.presetColorButton[style*="background-color: #ffffff"] {
+  border-color: var(--line-border);
+}
+
+.divider {
+  height: 1px;
+  background: var(--line-border);
+  margin: var(--dimension-08) 0;
+}
+
+.customColorSection {
+  margin: var(--dimension-08) 0;
+}
+
+.colorInput {
+  width: 32px;
+  height: 24px;
+  
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-06);
+  cursor: pointer;
+  
+  /* 기본 color input 스타일 제거 */
+  background: none;
+  padding: 0;
+}
+
+.colorInput::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-06);
+}
+
+.colorInput::-webkit-color-swatch {
+  border: none;
+  border-radius: var(--radius-06);
+}
+
+.colorLabel {
+  font-size: var(--typo-small-font-size);
+  color: var(--label-normal);
+}
+
+.removeColorButton {
+  width: 100%;
+  padding: var(--dimension-06) var(--dimension-12);
+  
+  background: transparent;
+  border: 1px solid var(--line-border);
+  border-radius: var(--radius-08);
+  color: var(--label-normal);
+  
+  font-size: var(--typo-small-font-size);
+  cursor: pointer;
+  transition: all var(--transition-duration-fast) ease;
+}
+
+.removeColorButton:hover {
+  background: var(--interaction-hover);
+  border-color: var(--line-border);
+}
+
+.removeColorButton:active {
+  background: var(--interaction-active);
+}
+
+.fadeIn {
+  animation: fadeIn var(--transition-duration-fast) ease-in-out;
+}
+
+.fadeOut {
+  animation: fadeOut var(--transition-duration-fast) ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.9;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    scale: 0.9;
+    transform: translateY(-8px);
+  }
+}

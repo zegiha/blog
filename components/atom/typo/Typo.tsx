@@ -1,9 +1,11 @@
 import BaseTypo, {IBaseTypo} from '@/components/atom/typo/BaseTypo'
 
 function createTypo(type: IBaseTypo['type']) {
-  return (props: Omit<IBaseTypo, 'type'>) => (
-    <BaseTypo type={type} {...props}/>
+  const Component = (props: Omit<IBaseTypo, 'type'>) => (
+    <BaseTypo type={type} {...props} />
   )
+  Component.displayName = `Typo(${type})`
+  return Component
 }
 
 const Typo = {

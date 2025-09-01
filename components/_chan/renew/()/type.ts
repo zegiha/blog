@@ -9,11 +9,13 @@ export type TRenewTextValueStyle = {
   italic?: boolean
 }
 
+export type TRenewTextValueStyleAndContent = {
+  content: string
+} & TRenewTextValueStyle
+
 export interface IRenewTextValue {
   type: Exclude<TArticleContentType, 'image'>
-  value: Array<{
-    content: string
-  } & TRenewTextValueStyle>
+  value: Array<TRenewTextValueStyleAndContent>
   // setValue: Dispatch<SetStateAction<Array<{
   //   content: string
   //   color?: string

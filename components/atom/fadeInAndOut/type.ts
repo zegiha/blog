@@ -12,7 +12,7 @@ interface IFadeInOut extends IUseFadeInOut {
   children: ReactNode
 }
 
-type WithClassName<T = {}> = T & { className?: string }
+type WithClassName<T extends object = object> = T & { className?: string }
 
 export type {
   IFadeInOut,

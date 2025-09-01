@@ -1,7 +1,7 @@
 'use client'
 
-import {TArticleContent} from '@/app/api/article/route'
 import {ICommandOptionModal} from '@/components/_chan/renew/valueTypeText/commandOptionModal/type'
+import {TArticleContent} from '@/entity/article/ArticleContentSchema'
 import {TArticleContentType} from '@/widget/article/create/[id]/bodySection/BodySection'
 import {useEffect, useRef, useState} from 'react'
 import defaultOptionData from '@/components/_chan/renew/valueTypeText/commandOptionModal/const/defaultOptionData'
